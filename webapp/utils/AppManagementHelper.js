@@ -1,0 +1,1 @@
+sap.ui.define([],function(){"use strict";return{_oApp:null,isPhone:null,setApp:function(e){this._oApp=e},getModel:function(e){var t=this.getApp().getModel(e);if(!t){t=new sap.ui.model.json.JSONModel;t.setSizeLimit(9999);this.getApp().setModel(t,e)}return t},getApp:function(){return this._oApp}}});

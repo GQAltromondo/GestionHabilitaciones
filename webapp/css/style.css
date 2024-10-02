@@ -1,0 +1,398 @@
+@media print {
+    .sapMITBNotScrollable {
+        display: none;
+    }
+    .sapMFooter-CTX {
+        display: none;
+    }
+    .sapUshellShellHead {
+        display: none;
+    }
+    .sapUshellShellCanvas {
+        top: 0;
+    }
+    .sapMIBar.sapMHeader-CTX {
+        display: none;
+    }
+    .sapUiSizeCompact .sapMPageWithHeader>section {
+        top: 0;
+    }
+    .colorGray {
+        background: #000000b0;
+        -webkit-print-color-adjust: exact;
+    }
+    .sapMInputBaseDisabled {
+        opacity: 1;
+    }
+    .sapMSwtOn .sapMSwtText {
+        color: black;
+    }
+    .sapMSwtDisabled {
+        opacity: 1;
+    }
+    .sapMSwtOn:not(.sapMSwtAcceptReject) {
+        background: #fff;
+        border-color: #fff;
+    }
+    .ContentHeader {
+        flex-wrap: nowrap !important;
+    }
+    .ContentHeader.sapUiSmallMargin {
+        margin-top: 0rem !important;
+    }
+    .sapUiSizeCompact .sapMComboBoxTextFieldArrow {
+        width: 0;
+        line-height: 1.5rem;
+        display: none;
+    }
+    .sapMComboBoxTextFieldInnerWidthExtraPadding {
+        padding-right: 0 !important;
+    }
+    .facadebtn {
+        display: none !important;
+    }
+    .sapUiHideOnPhone {
+        display: block !important;
+    }
+    .ContentTitle {
+        width: 65% !important;
+        flex-wrap: nowrap !important;
+        justify-content: left !important;
+    }
+    .ContentImg {
+        width: 30% !important;
+    }
+    .sapUiFormResGrid>div {
+        padding-bottom: 0rem !important;
+    }
+}
+.labelSeg {
+	color: #6a6d70 !important;
+	font-weight: normal !important;
+	text-align: right !important;
+}
+.oDialog .sapMFlexItem{
+	width: 100%;
+}
+.TextIndent {
+    text-indent: 20px;
+}
+.textBlue {
+    color: #2b609a;
+    font-weight: bold;
+}
+.customPanel header {
+    background: #eaeaea
+}
+.customPanel .sapMPanelContent {
+    background: #f3f3f3
+}
+.customPanel {
+    margin-top: 15px;
+}
+.customTable .sapMListTbl th {
+    background-color: #96c6fb;
+}
+.customTable .sapMListTblNavCol>.sapMLIBImgNav {
+    display: none;
+}
+.customTable tr:nth-child(odd) {
+    background-color: #e9f1fa;
+}
+.customTable tr:nth-child(odd):hover {
+    background-color: #f0f0f0;
+}
+.customTable .sapMListTblCell {
+    padding-left: 5px;
+    padding-right: 0px;
+}
+.sapMCbBgDis {
+    opacity: 1;
+}
+/*/Habilitacion estilo/*/
+.sticky{
+  position: fixed;
+  top: 0;
+  width:100%;
+  z-index:1;
+}
+.customPanel header {
+    background: #b6d4e9;
+}
+.contentLeg .sapMFlexItem {
+    width: 100%;
+}
+.contentDoc .sapMFlexItem {
+    width: 100%;
+}
+.contentLeg .sapUiFormResGrid>div {
+    padding-top: 0;
+}
+.contentDoc .sapUiFormResGrid>div {
+    padding-top: 0;
+}
+.sapMListTbl th span {
+    font-weight: bold !important;
+}
+.fixedScroll {
+    display: block;
+    max-height: 90%;
+    overflow: scroll;
+}
+.topSticky {
+    height: 70px !important;
+}
+.sapUiGlobalBackgroundColor,
+.sapMShellGlobalInnerBackground {
+    background-color: #fff;
+}
+.sapUshellShell .sapMPageBgStandard {
+    background-color: #fff !important;
+}
+.colorGray {
+    background: #f0f0f0;
+}
+.listTeam .sapMListTbl .sapMText,
+.sapMListTbl .sapMLabel {
+    color: #6c6c6c;
+    font-weight: bold;
+}
+.conTension .sapMFlexItem:last-child, .contentLeg .sapMFlexItem {
+    width: 100%;
+}
+.TitleBolder {
+    color: #515151;
+    font-weight: 700;
+}
+.TitleBold {
+    font-weight: bold;
+    margin-left: 5px;
+    color: #515151;
+    margin-top: 15px;
+}
+.subTitle {
+    color: #7b7b7b;
+    text-indent: 20px;
+    margin-bottom: 15px;
+}
+/* Habilitacion en trabajos de tension*/
+.sapUiCalItemNow>.sapUiCalItemText{
+	border: 0.125rem solid #225c8d !important;
+}
+.habMto .sapMLIBShowSeparator>td {
+     border-top:none; 
+}
+.HabTCT .sapMListTbl th{
+	background: #96C6FB!important;
+    border-bottom: 1px solid #eaeaea!important;
+} 
+.sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td, .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td{
+	border-bottom:1px solid #ccc;
+}
+.sapMITBContent td.sapMListTblCell{
+	background-color:#f0f0f0;
+}
+.sapMListTbl .sapMText, .sapMListTbl .sapMLabel{
+	color: #6c6c6c;
+}
+.sapUiSizeCompact .sapMListTblCell{
+	padding-top: 4px  !important;
+    padding-bottom: 4px !important;
+    
+}
+.sapMListTblCell{
+	padding-top: 4px  !important;
+    padding-bottom: 4px !important;
+    vertical-align: middle !important; 
+}
+.sapUiRespGridMedia-Std-Desktop.sapUiRespGridHSpace0>.sapUiRespGridSpanL8{
+	width:66.66666667%;
+}
+.bold{
+	font-weight:700;
+}
+.margin{
+	margin:10px ;
+}
+.paddingTop{
+	padding-top:15px !important;
+}
+.colorRed{
+	color:red !important;
+}
+.paddingNone{
+	padding-top:0px !important;
+}
+.HabTCT .sapUiFormResGridLastRowXL {
+    width: 70%!important;
+}
+.HabTCT .sapUiFormResGridLastContXL {
+    width: 30% !important;
+}
+.AvatarImg {
+	margin-top: 50px;
+}
+.subMrgTitle {
+    color: #7b7b7b;
+    margin-left: 20px;
+    line-height: 20px;
+}
+.titleBlue {
+    color: #225c8d;
+    font-weight: bold;
+    text-indent: 20px;
+}
+.subTitleBlue {
+    color: #225c8d;
+    text-indent: 20px;
+}
+.versionStyle {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+.fontSt {
+    font-size: 0.75rem;
+    line-height: 20px;
+}
+.ContentVersion {
+    border-right: 1px solid #ebebeb;
+}
+.sapUiCommonsHoriDivTypeArea {
+    border-color: #d4d4d4 !important;
+}
+.sapMInputBaseReadonlyInner .sapMInputBaseInner {
+    background: #fff;
+}
+.sapUiCommonsHoriDivHeightM {
+    margin-top: 25px !important;
+    margin-bottom: 25px !important;
+}
+.mrgTitle {
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.sapUiFormResGridCont {
+    padding-bottom: 0rem;
+}
+.titleTable {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+.listTeam .sapMLIBShowSeparator>td {
+    border-top: none;
+}
+.topLabel {
+    padding-top: 0.5rem !important;
+}
+.mrgLabel {
+    margin-left: 15px;
+}
+.formBold label {
+    font-weight: bold;
+}
+.listTeam td:nth-child(0n+5) {
+    border-bottom: 1px solid gray !important;
+}
+.listTeam .sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td,
+.listTeam .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td {
+    border-bottom: 1px solid #fff;
+}
+.sapMITBHead {
+    margin: 0 !important;
+}
+.sapMITB {
+    height: 90%;
+}
+.sapMITBContainerContent {
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.habPT15 .sapUiRespGrid .sapMText {
+    font-weight: bold;
+    color: #6c6c6c
+}
+.marginTopTitle {
+    margin-top: 15px
+}
+.sapUiRespGrid.sapUiRespGridVSpace1>div {
+    margin-bottom: 0;
+}
+.fileUploader .sapMBtnDisabled {
+    opacity: 0.8;
+}
+.fileUploader .sapMBtnDisabled .sapMBtnIcon {
+    color: #418ac7;
+}
+.fileUploader {
+    margin-right: 15px;
+}
+.fileUploader .sapMBtnInner {
+    background-color: #fff;
+    border: none;
+}
+.TextEnd {
+    text-align: right !important;
+}
+.sapMDialog.sapMPopup-CTX>header .sapMHeader-CTX,
+.sapMDialog.sapMPopup-CTX>header .sapMSubHeader-CTX {
+    background-color: #d8e4ef;
+}
+/*MediaQuerys Header Mobile*/
+@media (max-width: 599px) {
+    .ContentTitle {
+        width: 100% !important;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .titleBlue {
+        text-indent: 0;
+    }
+    .subTitleBlue {
+        text-indent: 0;
+    }
+    .ContentHeader {
+        flex-wrap: wrap-reverse;
+    }
+    .ContentVersion {
+        width: 100% !important;
+        border-right: none;
+    }
+    .ContentTitle .sapMTitle {
+        font-size: 1rem;
+        text-align: center;
+        width: 100%;
+    }
+    .ContentTitle .sapMFlexItem {
+        width: 100%;
+    }
+    .TextEnd {
+        text-align: left !important;
+    }
+}
+/*MediaQuerys Header Tablet*/
+@media (max-width: 1023px) and (min-width: 600px) {
+    .ContentTitle {
+        flex-wrap: wrap;
+        width: 40% !important;
+    }
+    .ContentVersion {
+        width: 30% !important;
+    }
+    .ContentImg img {
+        width: 100% !important;
+    }
+}
+.TitleSection {
+    margin-left: 5px;
+    color: #515151;
+    font-weight: bold;
+}
+.sapMITBContainerContent {
+    height: 80%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.signatureBackground{
+	background:transparent !important;
+}

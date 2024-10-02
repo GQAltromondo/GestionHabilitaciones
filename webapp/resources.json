@@ -1,0 +1,331 @@
+{
+    "resources": [
+        {
+            "name": "services/RegionServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/UserService.js"
+        },
+        {
+            "name": "libs/PDFmake/vfs_fonts.js"
+        },
+        {
+            "name": "libs/PDFmake/pdfmake.min.js"
+        },
+        {
+            "name": "view/Main.view.js"
+        },
+        {
+            "name": "view/App.view.js"
+        },
+        {
+            "name": "utils/i18nTranslationHelper.js"
+        },
+        {
+            "name": "utils/PrintTcT.js"
+        },
+        {
+            "name": "utils/PrintPT15.js"
+        },
+        {
+            "name": "utils/PrintMto.js"
+        },
+        {
+            "name": "utils/PrintAndDownloadHelper.js"
+        },
+        {
+            "name": "utils/NavigationHelper.js"
+        },
+        {
+            "name": "utils/MessageBoxHelper.js"
+        },
+        {
+            "name": "utils/FormatHelper.js"
+        },
+        {
+            "name": "utils/FioriHelper.js"
+        },
+        {
+            "name": "utils/FioriComponentHelper.js"
+        },
+        {
+            "name": "utils/FileDownloadHelper.js"
+        },
+        {
+            "name": "utils/AppManagementHelper.js"
+        },
+        {
+            "name": "services/oDataServicesOp.js"
+        },
+        {
+            "name": "services/oDataServices.js"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "services/TipoHabilitacionServices.js"
+        },
+        {
+            "name": "services/TareasTCTService.js"
+        },
+        {
+            "name": "services/RegionServices.js"
+        },
+        {
+            "name": "services/PuestosServices.js"
+        },
+        {
+            "name": "services/PersonalInternoServices.js"
+        },
+        {
+            "name": "services/MotivoCambioEstadoService.js"
+        },
+        {
+            "name": "services/IntervencionesServices.js"
+        },
+        {
+            "name": "services/HabilitacionServices.js"
+        },
+        {
+            "name": "services/HabTecnicasService.js"
+        },
+        {
+            "name": "services/HabRangoService.js"
+        },
+        {
+            "name": "services/GestionTareasTCTService.js"
+        },
+        {
+            "name": "services/FirmasUsuariosServices.js"
+        },
+        {
+            "name": "services/EstacionesServices.js"
+        },
+        {
+            "name": "services/ComentariosHabilitacionesService.js"
+        },
+        {
+            "name": "services/AdjuntosServices.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "controller/detailHabTCT.controller.js"
+        },
+        {
+            "name": "controller/detailHabPT15.controller.js"
+        },
+        {
+            "name": "controller/detailHabMTO.controller.js"
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "manifest-bundle.zip"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "services/TareasTCTService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "libs/PDFmake/vfs_fonts-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "libs/PDFmake/pdfmake.min-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "view/Main-dbg.view.js",
+            "isDebug": true
+        },
+        {
+            "name": "view/App-dbg.view.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/i18nTranslationHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/PrintTcT-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/PrintPT15-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/PrintMto-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/PrintAndDownloadHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/NavigationHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/MessageBoxHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/FormatHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/FioriHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/FioriComponentHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/FileDownloadHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "utils/AppManagementHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/oDataServicesOp-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/oDataServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/UserService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/TipoHabilitacionServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "services/PuestosServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/PersonalInternoServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/MotivoCambioEstadoService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/IntervencionesServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/HabilitacionServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/HabTecnicasService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/HabRangoService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/GestionTareasTCTService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/FirmasUsuariosServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/EstacionesServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/ComentariosHabilitacionesService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "services/AdjuntosServices-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/detailHabTCT-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/detailHabPT15-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/detailHabMTO-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Main-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../sap-ui-version.json"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "view/Detail/detailHabTCT.view.xml"
+        },
+        {
+            "name": "view/Detail/detailHabPT15.view.xml"
+        },
+        {
+            "name": "view/Detail/detailHabMTO.view.xml"
+        },
+        {
+            "name": "img/upload.png"
+        },
+        {
+            "name": "img/TRANSENER.png"
+        },
+        {
+            "name": "img/TRANSBA.png"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "index.html"
+        }
+    ]
+}

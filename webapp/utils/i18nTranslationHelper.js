@@ -1,0 +1,1 @@
+sap.ui.define(["transener/GestionHabilitaciones/utils/FioriComponentHelper"],function(e){"use strict";return{getTranslation:function(n,t){var r=e.getComponent();var i=r.byId("App").getModel("i18n");var o=i.getResourceBundle().getText(n,t);if(o){return o}return n}}});

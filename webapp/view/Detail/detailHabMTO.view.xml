@@ -1,0 +1,640 @@
+<mvc:View controllerName="transener.GestionHabilitaciones.controller.detailHabMTO" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{i18n>titleHanMto}" class="habMto" busy="{HabilitacionModel>/Busy}" busyIndicatorDelay="0" enableScrolling="false" showNavButton="true"
+				navButtonPress="onBack">
+				<content>
+					<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div"
+						visible="true" displayInline="false">
+						<items>
+							<HBox alignItems="Center" direction="Row" class="sapUiSmallMargin ContentHeader" width="100%" height="auto" renderType="Div">
+								<items>
+									<HBox alignItems="Start" width="65%" class="ContentTitle" justifyContent="Start">
+										<items>
+											<VBox>
+												<items>
+													<Title text="{i18n>textLicHab}" titleStyle="H3" class="titleBlue" textAlign="Begin" visible="true"/>
+													<Title text="Nro. {/Idhabilitacion}" titleStyle="H5" textAlign="Begin" class="TitleSection TextIndent"/>
+												</items>
+											</VBox>
+											<Title text="{i18n>textPerMant}" titleStyle="H4" class="subTitleBlue"/>
+										</items>
+										<layoutData/>
+									</HBox>
+									<VBox alignItems="Center" direction="Column" class="sapUiHideOnPhone ContentImg" fitContainer="false" width="35%" height="auto"
+										justifyContent="End" renderType="Div" visible="true" displayInline="false">
+										<items>
+											<Image class="signatureBackground" src="/img/{Habilitacion>/Empresa}.png" height="auto" width="200px" densityAware="false"/>
+										</items>
+										<layoutData/>
+									</VBox>
+								</items>
+								<layoutData/>
+							</HBox>
+						</items>
+						<layoutData/>
+					</VBox>
+					<IconTabBar select="onTabSelect" expandable="false" class="sapUiResponsiveContentPadding">
+						<items>
+							<IconTabFilter text="{i18n>Habilitacion}">
+								<VBox alignItems="Stretch" direction="Column" class="sapUiLargeMarginBottom" justifyContent="Start" renderType="Div">
+									<items>
+										<HBox width="100%" class="marginTopTitle" justifyContent="SpaceBetween">
+											<items>
+												<Title text="{i18n>DatosPerAgen}" titleStyle="H4" class="TitleSection TitleBold" width="auto" textAlign="Left" visible="true"/>
+											</items>
+										</HBox>
+										<VBox class="colorGray">
+											<items>
+												<f:Form editable="true">
+													<f:layout>
+														<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+															emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+													</f:layout>
+													<f:formContainers>
+														<f:FormContainer>
+															<f:formElements>
+																<f:FormElement label="{i18n>persInt}">
+																	<f:fields>
+																		<Switch state="{ path: 'Habilitacion>/Interno', formatter: '.formatSwitch'}" id="seletType" customTextOn="Si" enabled="false" customTextOff="No"
+																			change="onSelectedType"/>
+																		<core:InvisibleText text="{ path: '/Idhabilitacion', formatter: '.LoadIntervenciones'}"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement >
+																	<f:label>
+																		<Label text="{i18n>legajo}" id="labelLegajo" visible="false"/>
+																	</f:label>
+																	<f:fields>
+																		<Input type="Text" value="{Habilitacion>/Legajo}" visible="false" id="inputLegajo" editable="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Nombre}">
+																	<f:fields>
+																		<Input type="Text" value="{/Nombre}" editable="false">
+																			<layoutData>
+																				<l:GridData span="XL3 L3 M3 S12"/>
+																			</layoutData>
+																		</Input>
+																		<Label text="{i18n>Apellido}" class="topLabel TextEnd marginTop paddingTop">
+																			<layoutData>
+																				<l:GridData span="XL2 L2 M2 S12"/>
+																			</layoutData>
+																		</Label>
+																		<Input type="Text" value="{/Apellido}" editable="false">
+																			<layoutData>
+																				<l:GridData span="XL4 L4 M4 S12"/>
+																			</layoutData>
+																		</Input>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>docIdent}">
+																	<f:fields>
+																		<ComboBox selectedKey="{Habilitacion>/Tipodoc}" editable="false">
+																			<items>
+																				<core:Item text="DNI" key="1"/>
+																				<core:Item text="Pasaporte" key="2"/>
+																				<core:Item text="Otro" key="3"/>
+																			</items>
+																			<layoutData>
+																				<l:GridData span="XL1 L1 M1 S4"/>
+																			</layoutData>
+																		</ComboBox>
+																		<Input type="Text" value="{Habilitacion>/Documento}" editable="false" >
+																			<layoutData>
+																				<l:GridData span="XL2 L2 M2 S8"/>
+																			</layoutData>
+																		</Input>
+																		<Label text="{i18n>textRegion}" class="topLabel TextEnd paddingTop">
+																			<layoutData>
+																				<l:GridData span="XL2 L2 M2 S12"/>
+																			</layoutData>
+																		</Label>
+																		<ComboBox selectedKey="{Habilitacion>/Area}" editable="false" items="{Regiones>/Regiones}">
+																			<items>
+																				<core:Item key="{Regiones>Codigo}" text="{Regiones>Region}"/>
+																			</items>
+																			<layoutData>
+																				<l:GridData span="XL4 L4 M4 S12"/>
+																			</layoutData>
+																		</ComboBox>
+																	</f:fields>
+																</f:FormElement>
+															</f:formElements>
+														</f:FormContainer>
+													</f:formContainers>
+												</f:Form>
+											</items>
+										</VBox>
+										<HBox alignItems="Center" justifyContent="SpaceBetween" class="contentHab MarginTop">
+											<items>
+												<Title text="{i18n>HABILITACIÓN}" titleStyle="H5" class="TitleBold" textAlign="Begin" visible="true"/>
+												<VBox alignItems="Center" class="colorGray conTension margin" width="80%">
+													<items>
+														<Text text="{i18n>nivelTension}" class="colorGray bold sapUiTinyMargin" textAlign="Begin"
+															visible="true"/>
+														<l:Grid width="100%" defaultSpan="L2 M6 S12">
+															<l:content>
+																<CheckBox text="500 KV" selected="{Habilitacion>/Mto500}" enabled="false"  width="auto" textDirection="Inherit"/>
+																<CheckBox text="220 KV" selected="{Habilitacion>/Mto220}" enabled="false" width="auto" textDirection="Inherit"/>
+																<CheckBox text="132 KV" selected="{Habilitacion>/Mto132}" enabled="false"  width="auto" textDirection="Inherit"/>
+																<CheckBox text="66 KV" selected="{Habilitacion>/Mto66}" enabled="false"  width="auto" textDirection="Inherit"/>
+																<CheckBox text="33 KV" selected="{Habilitacion>/Mto33}" enabled="false" width="auto" textDirection="Inherit"/>
+																<CheckBox text="13,2 KV" selected="{Habilitacion>/Mto13}" enabled="false" width="auto" textDirection="Inherit"/>
+															</l:content>
+														</l:Grid>
+													</items>
+												</VBox>
+											</items>
+										</HBox>
+										<Table width="100%" noDataText="{i18n>noDataText}" class="tableContent sapUiSmallMarginBottom">
+											<columns>
+												<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+													<header>
+														<Text text="{i18n>TAREAS}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="100px" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="{i18n>Solicitante}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="200px" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="{i18n>JefeTrabajo}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="220px" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="{i18n>JefeTrabajoGuiado}" width="auto" maxLines="2" wrapping="true" textAlign="Center" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+												<Column width="200px" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline"
+													mergeDuplicates="false">
+													<header>
+														<Text text="{i18n>PersonalMto}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit"/>
+													</header>
+													<footer/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{i18n>EstTrans}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/EstSolic/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/EstJefeTraba/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/EstJefeTrabaSupl/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/EstPersonalMant/selected}"/>
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem>
+													<cells>
+														<Text text="{i18n>Protecciones}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/ProtSolic/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/ProtJefeTraba/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/ProtJefeTrabaSupl/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/ProtPersonalMant/selected}"/>
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem>
+													<cells>
+														<Text text="{i18n>Mediciones}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/MedSolic/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/MedJefeTraba/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/MedJefeTrabaSupl/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/MedPersonalMant/selected}"/>
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem>
+													<cells>
+														<Text text="{i18n>SistControl}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisContSolic/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisContJefeTraba/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisContJefeTrabaSupl/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisContPersonalMant/selected}"/>
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem>
+													<cells>
+														<Text text="{i18n>SistCom}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisComuSolic/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisComuJefeTraba/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisComuJefeTrabaSupl/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/SisComuPersonalMant/selected}"/>
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem>
+													<cells>
+														<Text text="{i18n>Lineas}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														<CheckBox enabled="false" select="handleLineCheck" selected="{TaskSelectionJsonModel>/LineaSolic/selected}"/>
+														<CheckBox enabled="false" select="handleLineCheck" selected="{TaskSelectionJsonModel>/LineaJefeTraba/selected}"/>
+														<CheckBox enabled="false" select="handleLineCheck" selected="{TaskSelectionJsonModel>/LineaJefeTrabaSupl/selected}"/>
+														<CheckBox enabled="false" select="handleLineCheck" selected="{TaskSelectionJsonModel>/LineaPersonalMant/selected}"/>
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem>
+													<cells>
+														<Text text="{i18n>RedesOp}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/AdmRedOpSolic/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/AdmRedOpJefeTraba/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/AdmRedOpJefeTrabaSupl/selected}"/>
+														<CheckBox enabled="false" selected="{TaskSelectionJsonModel>/AdmRedOpPersonalMant/selected}"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+										<HBox width="100%" class="marginTopTitle" justifyContent="SpaceBetween">
+											<items>
+												<Title text="{i18n>textConfAgen}" titleStyle="H4" class="TitleSection" width="auto" textAlign="Begin" visible="true"/>
+											</items>
+										</HBox>
+										<VBox class="colorGray">
+											<items>
+												<f:Form editable="true">
+													<f:layout>
+														<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+															emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+													</f:layout>
+													<f:formContainers>
+														<f:FormContainer>
+															<f:formElements>
+																<f:FormElement >
+																	<f:fields>
+																		<Text text="{i18n>conformEmp1} {/society} {i18n>conformEmp2}:"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Fecha}">
+																	<f:fields>
+																		<DatePicker dateValue="{HabilitacionModel>/Solicitante_Fecha}" editable="false" displayFormat="dd/MM/yyyy"/>
+																		<Label text="{i18n>aclara}:" class="topLabel TextEnd paddingTop "/>
+																		<Input type="Text" value="{HabilitacionModel>/Solicitante_Nombre}" editable="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>FirmaAgente}">
+																	<f:fields>
+																		<Image class="signatureBackground" src="{HabilitacionModel>/Solicitante_Firma}" height="70px" width="200px" densityAware="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Comentarios}">
+																	<f:fields>
+																		<TextArea rows="3" value="{SendCommentModel>/ConformidadAgenteComment}" editable="{EditableCommentsModel>/editMode_solicitante}"/>
+																	</f:fields>
+																</f:FormElement>
+															</f:formElements>
+														</f:FormContainer>
+													</f:formContainers>
+												</f:Form>
+											</items>
+										</VBox>
+										<HBox width="100%" class="marginTopTitle" justifyContent="SpaceBetween">
+											<items>
+												<Title text="{i18n>EntrenamExpTrab}" titleStyle="H4" class="TitleSection" width="auto" textAlign="Begin" visible="true"/>
+											</items>
+										</HBox>
+										<VBox class="colorGray">
+											<items>
+												<f:Form editable="true">
+													<f:layout>
+														<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+															emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+													</f:layout>
+													<f:formContainers>
+														<f:FormContainer>
+															<f:formElements>
+																<f:FormElement>
+																	<f:fields>
+																		<Text text="{i18n>certiAgente}"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Fecha}">
+																	<f:fields>
+																		<DatePicker dateValue="{HabilitacionModel>/Capacitacion_Fecha}" editable="false" displayFormat="dd/MM/yyyy"/>
+																		<Label text="{i18n>aclara}:" class="topLabel TextEnd paddingTop "/>
+																		<Input type="Text" value="{HabilitacionModel>/Capacitacion_Nombre}" editable="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>FirmaResponsable}">
+																	<f:fields>
+																		<Image class="signatureBackground" src="{HabilitacionModel>/Capacitacion_Firma}" height="70px" width="200px" densityAware="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Comentarios}">
+																	<f:fields>
+																		<TextArea rows="3" value="{SendCommentModel>/CapaYEntrenamComment}" editable="{EditableCommentsModel>/editMode_capacitacion}"/>
+																	</f:fields>
+																</f:FormElement>
+															</f:formElements>
+														</f:FormContainer>
+													</f:formContainers>
+												</f:Form>
+											</items>
+										</VBox>
+										<HBox width="100%" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom contentConf marginTopTitle">
+											<items>
+												<HBox alignItems="Center" direction="Row" class="conTension colorGray " fitContainer="false" width="49%" justifyContent="SpaceBetween"
+													renderType="Div" visible="true" displayInline="false">
+													<items>
+														<f:Form editable="true">
+															<f:layout>
+																<f:ResponsiveGridLayout labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+																	emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer>
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:label>
+																				<Label text="{i18n>ConfSstma}" class="TitleBolder"/>
+																			</f:label>
+																			<f:fields>
+																				<Label text="{i18n>Fecha}"/>
+																				<DatePicker dateValue="{HabilitacionModel>/SegHigiene_Fecha}" editable="false" displayFormat="dd/MM/yyyy"/>
+																			</f:fields>
+																		</f:FormElement>
+																		<f:FormElement label="{i18n>aclara}" class="paddingTop ">
+																			<f:fields>
+																				<Input type="Text" value="{HabilitacionModel>/SegHigiene_Nombre}" editable="false"/>
+																			</f:fields>
+																		</f:FormElement>
+																		<f:FormElement label="{i18n>Firma}">
+																			<f:fields>
+																				<Image class="signatureBackground" src="{HabilitacionModel>/SegHigiene_Firma}" height="70px" width="200px" densityAware="false"/>
+																			</f:fields>
+																		</f:FormElement>
+																		<f:FormElement label="{i18n>Comentarios}">
+																			<f:fields>
+																				<TextArea rows="3" value="{SendCommentModel>/SeguridadHigieneComment}" editable="{EditableCommentsModel>/editMode_segHigiene}" />
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+													</items>
+												</HBox>
+												<HBox alignItems="Center" direction="Row" class="conTension colorGray " fitContainer="false" width="49%" justifyContent="SpaceBetween"
+													renderType="Div" visible="true" displayInline="false">
+													<items>
+														<f:Form editable="true">
+															<f:layout>
+																<f:ResponsiveGridLayout labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+																	emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer>
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:label>
+																				<Label text="{i18n>confSegPublica}" class="TitleBolder"/>
+																			</f:label>
+																			<f:fields>
+																				<Label text="{i18n>Fecha}" class="paddingTop "></Label>
+																				<DatePicker	dateValue="{HabilitacionModel>/SegPublica_Fecha}" editable="false" displayFormat="dd/MM/yyyy"/>
+																			</f:fields>
+																		</f:FormElement>
+																		<f:FormElement label="{i18n>aclara}" class="paddingTop ">
+																			<f:fields>
+																				<Input type="Text" value="{HabilitacionModel>/SegPublica_Nombre}" editable="false"/>
+																			</f:fields>
+																		</f:FormElement>
+																		<f:FormElement label="{i18n>Firma}">
+																			<f:fields>
+																				<Image class="signatureBackground" src="{HabilitacionModel>/SegPublica_Firma}" height="70px" width="200px" densityAware="false"/>
+																			</f:fields>
+																		</f:FormElement>
+																		<f:FormElement label="{i18n>Comentarios}">
+																			<f:fields>
+																				<TextArea rows="3" value="{SendCommentModel>/SegPublicaComment}" editable="{EditableCommentsModel>/editMode_segPublica}" />
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+													</items>
+													<layoutData/>
+												</HBox>
+											</items>
+										</HBox>
+										<HBox width="100%" class="marginTopTitle" justifyContent="SpaceBetween">
+											<items>
+												<Title text="{i18n>confSecretaria}" titleStyle="H4" class="TitleSection" width="auto" textAlign="Begin" visible="true"/>
+												<u:FileUploader class="fileUploader" enabled="{ parts : [{path: 'UserData>/recipientGroups/0'},'i18n>Secretaria'], formatter: '.onEnableRol'}" tooltip="Adjuntar Archivo."
+													buttonText="{i18n>adjuntar}" buttonOnly="true" change="onChangeFile" icon="sap-icon://attachment"></u:FileUploader>
+											</items>
+										</HBox>
+										<VBox class="colorGray sapUiSmallMarginBottom">
+											<items>
+												<f:Form editable="true">
+													<f:layout>
+														<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+															emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+													</f:layout>
+													<f:formContainers>
+														<f:FormContainer>
+															<f:formElements>
+																<f:FormElement label="{i18n>Fecha}">
+																	<f:fields>
+																		<DatePicker enabled="{ parts : [{path: 'UserData>/recipientGroups/0'},'i18n>cap_entrenamiento'], formatter: '.onEnableRol'}"
+																			dateValue="{HabilitacionModel>/Secretaria_Fecha}" editable="false" displayFormat="dd/MM/yyyy"/>
+																		<Label text="{i18n>aclara}:" class="topLabel TextEnd"/>
+																		<Input type="Text" value="{HabilitacionModel>/Secretaria_Nombre}" enabled="{ parts : [{path: 'UserData>/recipientGroups/0'},'i18n>cap_entrenamiento'], formatter: '.onEnableRol'}"
+																			editable="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Firma}">
+																	<f:fields>
+																		<Image class="signatureBackground" src="{HabilitacionModel>/Secretaria_Firma}" height="70px" width="200px" densityAware="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Comentarios}">
+																	<f:fields>
+																		<TextArea rows="3" value="{SendCommentModel>/SecretGerenciComment}" editable="{EditableCommentsModel>/editMode_secretaria}" />
+																	</f:fields>
+																</f:FormElement>
+															</f:formElements>
+														</f:FormContainer>
+													</f:formContainers>
+												</f:Form>
+											</items>
+										</VBox>
+										<VBox class="colorGray">
+											<items>
+												<Text text="{i18n>confGerentes}" class="TitleBold mrgLabel"/>
+												<f:Form editable="true">
+													<f:layout>
+														<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+															emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+													</f:layout>
+													<f:formContainers>
+														<f:FormContainer>
+															<f:formElements>
+																<f:FormElement >
+																	<f:fields>
+																		<Text text="{i18n>TextOtorgLicencia}" class="topLabel">
+																			<layoutData>
+																				<l:GridData span="XL9 L9 M9 S12"/>
+																			</layoutData>
+																		</Text>
+																		<Label text="{i18n>Fecha}:" class="TextEnd topLabel paddingTop ">
+																			<layoutData>
+																				<l:GridData span="XL1 L1 M1 S12"/>
+																			</layoutData>
+																		</Label>
+																		<DatePicker displayFormat="dd/MM/yyyy" dateValue="{HabilitacionModel>/GerRegional_Fecha}" editable="false">
+																			<layoutData>
+																				<l:GridData span="XL2 L2 M2 S12"/>
+																			</layoutData>
+																		</DatePicker>
+																	</f:fields>
+																</f:FormElement>
+															</f:formElements>
+														</f:FormContainer>
+														<f:FormContainer>
+															<f:formElements>
+																<f:FormElement>
+																	<f:fields>
+																		<Label text="{i18n>HabValida}" design="Bold" class="topLabel">
+																			<layoutData>
+																				<l:GridData span="XL3 L3 M3 S12"/>
+																			</layoutData>
+																		</Label>
+																		<DatePicker displayFormat="dd/MM/yyyy" dateValue="{HabilitacionModel>/GerRegional_Fecha_vencimiento}" editable="false">
+																			<layoutData>
+																				<l:GridData span="XL3 L3 M3 S12"/>
+																			</layoutData>
+																		</DatePicker>
+																		<Label text="{i18n>aclara}:" class="TextEnd topLabel paddingTop ">
+																			<layoutData>
+																				<l:GridData span="XL3 L3 M3 S12"/>
+																			</layoutData>
+																		</Label>
+																		<Input type="Text" value="{HabilitacionModel>/GerRegional_Nombre}" editable="false">
+																			<layoutData>
+																				<l:GridData span="XL3 L3 M3 S12"/>
+																			</layoutData>
+																		</Input>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Firma}">
+																	<f:fields>
+																		<Image class="signatureBackground" src="{HabilitacionModel>/GerRegional_Firma}" height="70px" width="200px" densityAware="false"/>
+																	</f:fields>
+																</f:FormElement>
+																<f:FormElement label="{i18n>Comentarios}">
+																	<f:fields>
+																		<TextArea rows="3" value="{SendCommentModel>/ConfGerReg}" editable="{EditableCommentsModel>/editMode_gerRegional}" />
+																	</f:fields>
+																</f:FormElement>
+															</f:formElements>
+														</f:FormContainer>
+													</f:formContainers>
+												</f:Form>
+											</items>
+										</VBox>
+									</items>
+									<layoutData/>
+								</VBox>
+							</IconTabFilter>
+							<IconTabFilter text="{i18n>Adjuntos}">
+								<VBox busy="{HabilitacionModel>/Busy}" busyIndicatorDelay="0" visible="{ parts : [{path: 'UserJsonModelVISTA>/User/0/roles'} ], formatter: '.SaveAttachmentVisibility'}">
+									<HBox justifyContent="SpaceBetween" alignItems="Center">
+										<Title level="H1" text="{i18n>AdjDocComp}" />
+										<u:FileUploader class="fileUploader" tooltip="{i18n>adjuntar}" buttonText="{i18n>adjuntar}" buttonOnly="true" icon="sap-icon://attachment" change="onChangeFile" sameFilenameAllowed="true" enabled="{ parts : [{path: 'Habilitacion>/Estado'} ], formatter: '.enableOnlyIfStatusDistinctToRevocado'}" ></u:FileUploader>
+									</HBox>
+								</VBox>								
+								<VBox items="{path: 'Intervenciones>/Intervenciones'}" class="sapUiLargeMarginBottom">
+									<items>
+										<Panel expandable="true" expanded="false" width="auto"
+											visible="{ parts : [{path: 'Intervenciones>AdjuntosSet'}], formatter: '.validaAjuntos'}" class="sapUiResponsiveMargin customPanel">
+											<headerToolbar>
+												<Toolbar height="45px">
+													<Title titleStyle="H4" text="{Intervenciones>Rol} - {Intervenciones>Nombre}"/>
+													<ToolbarSpacer/>
+													<Text text="{ parts : [{path: 'Intervenciones>Fechaint'},{path: 'Intervenciones>Horaint'}], formatter: '.formatDateTime'}"/>
+												</Toolbar>
+											</headerToolbar>
+											<content>
+												<Title titleStyle="H5" text="{i18n>Adjuntos}:"/>
+												<VBox items="{path: 'Intervenciones>AdjuntosSet/results'}">
+													<items>
+														<Link text="{Intervenciones>Nombre} " press="handleLinkAdjuntoPress"/>
+													</items>
+												</VBox>
+											</content>
+										</Panel>
+									</items>
+								</VBox>
+							</IconTabFilter>
+							<IconTabFilter key="Comentarios" text="{i18n>Comentarios}">
+								<Table items="{path: 'ComentariosHabilitacionesModel>/results'}" noDataText="{i18n>noDataText}">
+									<columns>
+										<Column vAlign="Middle">
+											<Text text="{i18n>Rol}"/>
+										</Column>
+										<Column vAlign="Middle">
+											<Text text="{i18n>Comentarios}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{ path: 'ComentariosHabilitacionesModel>Rol', formatter: '.RolFormatter'}" />
+												<Text text="{ComentariosHabilitacionesModel>Comentarios}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</IconTabFilter>
+							<IconTabFilter key="Estado" text="{i18n>CambioEstado}">
+								<Table items="{path: 'MotivoCambioEstadoModel>/results'}" noDataText="{i18n>noDataText}">
+									<columns>
+										<Column vAlign="Middle">
+											<Text text="{i18n>Fecha}"/>
+										</Column>
+										<Column hAlign="Begin" vAlign="Middle">
+											<Text text="{i18n>Rol}"/>
+										</Column>
+										<Column hAlign="Center" vAlign="Middle">
+											<Text text="{i18n>Estado}"/>
+										</Column>
+										<Column hAlign="Center" vAlign="Middle">
+											<Text text="{i18n>Comentarios}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{ parts : [{path: 'MotivoCambioEstadoModel>Fecha'}, {path: 'MotivoCambioEstadoModel>Hora'}], formatter: '.formatDateTime'}"/>
+												<Text text="{path: 'MotivoCambioEstadoModel>Rol', formatter: '.RolFormatter'}"/>
+												<Text text="{path: 'MotivoCambioEstadoModel>Estado', formatter: '.StatusFormatter' }"/>
+												<Text text="{MotivoCambioEstadoModel>Comentarios}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://notification-2" press="onSaveComment" text="{i18n>GuardarComentario}"/>
+						<Button icon="sap-icon://save" press="onChangeStatus" text="{i18n>CambiarEstado}" enabled="{ parts : [{path: 'UserJsonModelVISTA>/User/0/roles'},{path: 'Habilitacion>/Estado'},{path: 'Habilitacion>/Area'} ], formatter: '.onEnableRol2'}"/>
+						<Button icon="sap-icon://print" press="onDonwloadHabilitacion" text="{i18n>Imprimir}"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
