@@ -16,8 +16,8 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "GestionHabiliataciones-Display": {
-          "semanticObject": "GestionHabiliataciones",
+        "GestionHabilitaciones-Display": {
+          "semanticObject": "GestionHabilitaciones",
           "action": "Display",
           "title": "{{flpTitle}}",
           "signature": {

@@ -15,7 +15,7 @@ sap.ui.define([
 			var aGroupsTemporal = datos[0].groups;
 
 			var aGroups = aGroupsTemporal.map(function (fila) {
-				return fila.display;
+				return fila.value;
 			});
 
 			var aUserData = {
@@ -74,10 +74,9 @@ sap.ui.define([
 				.then(() => {
 					//check if data has been loaded
 					//for local testing, set mock data
-					if (oModel.getData().email) {
+					if (oModel.getData().name) {
 
-						var cUrl = sap.ui.getCore().getModel("appCurrentInfo").appUrl + '/IAS/scim/Users?filter=emails.value eq "' + oModel.getData().email + '"'
-
+						var cUrl = sap.ui.getCore().getModel("appCurrentInfo").appUrl + '/IAS/service/scim/Users?filter=userName eq "' + oModel.getData().name + '"'
 						//Llamar a API del IAS
 						$.ajax({
 
@@ -95,12 +94,12 @@ sap.ui.define([
 								var oModelUser = new sap.ui.model.json.JSONModel();
 								oModelUser.setData(data.Resources);
 
-								debugger;
 								var aDatosUsuario = that.armarDatos(data.Resources);
 
+								that.onReadUserApiSuccess(aDatosUsuario)
 								oModel.setData(aDatosUsuario);
-								//oView.getView().setModel(oModel, "users");
-								sap.ui.getCore().setModel(oModel, "UserJsonModel");
+
+
 							},
 							error: function (data, xhr, textStatus) {
 								console.log(data);
@@ -120,6 +119,83 @@ sap.ui.define([
 				.catch(() => {
 					oModel.setData(mock);
 				});
-		}
+		},
+
+		getRoles: function (groupData) {
+			var aData = [];
+			if (groupData.constructor === Array) {
+				aData = aData.concat(groupData);
+			} else {
+				if (groupData !== "") {
+					aData.push(groupData);
+				}
+			}
+			return aData;
+		},
+		onReadUserApiSuccess: function (data, textStatus, jqXHR) {
+
+			AppManagementHelper.getModel("UserJsonModel").setProperty("/User",[{
+				nombre: data.firstName,
+				apellido: data.lastName,
+				login_name: data.login_name,
+				email: data.email,
+				// roles: ["Supervisor_MantenimienTto"],
+
+				// Paso 1 para creacion de licencias.
+				// roles: ["ope_solic-lic_transener", "ope_solic-lic_transener"],
+				// (Nuevo rol ope_solic-lic_transba Issue #518).
+				// roles: ["ope_solic-lic_transba"],
+
+				// Paso 2 Coordinador.
+				// roles: ["Coordinador_Mantenimiento"],
+				// roles: ["Coordinador_Mantenimiento"],
+
+				// Paso 3 Tramitado -> tramita u observa.
+				//roles: ["Tramitador"],
+
+				// Paso 4 Entraga, devolución y cancelación definitiva.
+				//roles: ["ope_jefe_cot"],
+				//roles: ["Jefe_COT"]
+				// roles: ["ope_programacion_cotdt"],
+				//roles:["Programacion_COTDT"]
+				// roles: ["ope_oper-turno_cot"],
+
+				// IMPORTANTE: deployear siempre con este descomentado.
+				// ##########################################################################
+				// ############################## IMPORTANTE ################################
+				// ##########################################################################
+				roles: this.getRoles(data.groups)
+				// ##########################################################################
+				// ##########################################################################
+			}]);
+		},
+
+		onReadUserApiError: function (jqXHR, textStatus, error) {
+			//verifies if session is still active
+			var sessionTimeoutResponseCode = 503;
+			if (error.response.statusCode === sessionTimeoutResponseCode) {
+				//session timeout
+				FioriHelper.showSessionTimeoutMessageBox();
+				return;
+			}
+
+			//gets error
+			var errorText = error.response.body;
+			//parses error
+			var contentType = error.response.headers["Content-Type"];
+			if (contentType.indexOf("text/html") >= 0) {
+				//HTML
+				errorText = $(error.response.body).text();
+			} else if (contentType.indexOf("application/json") >= 0) {
+				//JSON
+				try {
+					var oError = JSON.parse(errorText);
+					errorText = oError.error.message.value;
+				} catch (ex) {
+					//error in parsing
+					errorText = error.response.body;
+				}
+			}
+		},
 	};
 });

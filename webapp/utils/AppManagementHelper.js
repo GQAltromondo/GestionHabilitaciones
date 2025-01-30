@@ -1,1 +1,26 @@
-sap.ui.define([],function(){"use strict";return{_oApp:null,isPhone:null,setApp:function(e){this._oApp=e},getModel:function(e){var t=this.getApp().getModel(e);if(!t){t=new sap.ui.model.json.JSONModel;t.setSizeLimit(9999);this.getApp().setModel(t,e)}return t},getApp:function(){return this._oApp}}});
+sap.ui.define([
+	
+], function () {
+	"use strict";
+	return {
+		// globales 
+		_oApp: null,
+		isPhone: null,
+		setApp: function (oApp) {
+			this._oApp = oApp;
+		},
+		getModel: function (sModelName) {
+			var jsonModel = sap.ui.getCore().getModel(sModelName);
+			if (!jsonModel) {
+				jsonModel = new sap.ui.model.json.JSONModel();
+				jsonModel.setSizeLimit(9999);
+				sap.ui.getCore().setModel(jsonModel, sModelName);
+			}
+			return jsonModel;
+		},
+		getApp: function () {
+			return this._oApp;
+		}
+		
+	};
+});
