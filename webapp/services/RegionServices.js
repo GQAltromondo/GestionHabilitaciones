@@ -7,7 +7,7 @@ sap.ui.define([
 
         LoadRegiones: function (Empresa, onSuccessCallback, onErrorCallback) {
             var odataModel = oDataServices.getModel();
-            debugger;
+           
             odataModel.read("/RegionesSet", {
                 filters: [
                     new sap.ui.model.Filter("Empresa", sap.ui.model.FilterOperator.EQ, Empresa)
