@@ -1,1 +1,87 @@
-sap.ui.define(["transener/GestionHabilitaciones/utils/FioriComponentHelper"],function(e){"use strict";return{_appId:"app",_getApp:function(){var t=e.getComponent();return t.byId("App").byId(this._appId)},_pageIsMaster:function(e){return e.match(/Master$/)!==null},_getPageName:function(e){var t=e.split(".");return t[t.length-1]},_getPageInstance:function(t,a){var n=this._pageIsMaster(t);var i=e.getComponent();var p=i.byId("App").byId(a);if(!p){var r=i.byId("App").createId(a);p=sap.ui.xmlview(r,t);this._getApp().addPage(p,n)}return p},to:function(e){var t=this._getPageName(e.pageId);var a=this._getPageInstance(e.pageId,t);if(e.model){a.setModel(e.model)}if(e.context){a.setBindingContext(e.context)}var n=a.getId();this._getApp().to(n,e.transitionName)},destroyPage:function(t){var a=e.getComponent();var n=a.byId("App").byId(t);n.destroy()},back:function(e){e=e?e:{};var t=this._getApp().getCurrentPage().getId();if(e.pageName){this._getApp().backToPage(e.pageName)}else{this._getApp().back()}if(e.destroy){var a=this;setTimeout(function(){a.destroyPage(t)},500)}}}});
+sap.ui.define([
+	//utils
+	"transener/GestionHabilitaciones/utils/FioriComponentHelper"
+	], function(FioriComponentHelper) {
+	"use strict";
+
+	return {
+		
+		_appId: "app",
+		
+		_getApp: function() {
+	    	//gets component
+	    	var component = FioriComponentHelper.getComponent();
+			return component.byId("App").byId(this._appId);
+		},
+		
+		_pageIsMaster: function(pageId) {
+			return (pageId.match(/Master$/) !== null);
+		},
+
+		_getPageName: function(pageId) {
+			var pageParts = pageId.split(".");
+			return pageParts[pageParts.length - 1];
+		},
+		
+		_getPageInstance: function(pageId, pageName) {
+			var isMaster = this._pageIsMaster(pageId);
+			//verifica si ya instancio esa pagina
+		    var component = FioriComponentHelper.getComponent();
+			var view = component.byId("App").byId(pageName);
+			if (!view) {
+				//creates view
+				var viewId = component.byId("App").createId(pageName);
+				view = sap.ui.xmlview(viewId, pageId);
+				//adds view to split app
+				this._getApp().addPage(view, isMaster);
+			}
+			return view;
+		},
+		
+		//options: objeto con pageId, context, model, transitionName
+		to: function(options) {
+			var pageName = this._getPageName(options.pageId);
+			//gets view
+			var view = this._getPageInstance(options.pageId, pageName);
+			//modelo
+			if (options.model) {
+				view.setModel(options.model);
+			}
+			//contexto
+			if (options.context) {
+				view.setBindingContext(options.context);
+			}
+			//navigates
+			var viewId = view.getId();
+			this._getApp().to(viewId, options.transitionName);
+		},
+		
+		destroyPage: function(pageId) {
+		    var component = FioriComponentHelper.getComponent();
+			var view = component.byId("App").byId(pageId);
+			//destruye vista
+			view.destroy();
+		},
+		
+		//options: object with pageName, destroy
+		back: function(options) {
+			options = (options) ? options: {};
+			//pagina actual
+			var currentPageId = this._getApp().getCurrentPage().getId();
+			//back
+			if (options.pageName) {
+				this._getApp().backToPage(options.pageName);
+			}
+			else {
+				this._getApp().back();
+			}
+			//se fija si debe eliminar la pagina actual
+			if (options.destroy) {
+				var navigationHelper = this;
+				setTimeout(function() {
+					navigationHelper.destroyPage(currentPageId);
+				}, 500);
+			}
+		}
+	};
+});

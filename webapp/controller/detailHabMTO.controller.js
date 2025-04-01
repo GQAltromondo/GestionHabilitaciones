@@ -358,10 +358,21 @@ sap.ui.define([
                 return false;
             }
         },
-        LoadIntervenciones: function (Idhabilitacion) {
+        // LoadIntervenciones: function (Idhabilitacion) {
+        //     if (Idhabilitacion) {
+        //         this.getHabilitacion(Idhabilitacion);
+        //         IntervencionesServices.loadIntervenciones(Idhabilitacion,
+        //             "H0001",
+        //             jQuery.proxy(this.SuccessCallBackInt, this),
+        //             jQuery.proxy(this.ErrorCallBackInt, this)
+        //         );
+        //     }
+        // },
+        LoadIntervenciones: async function (Idhabilitacion) {
             if (Idhabilitacion) {
-                this.getHabilitacion(Idhabilitacion);
-                IntervencionesServices.loadIntervenciones(Idhabilitacion,
+                await this.getHabilitacion(Idhabilitacion); // Espera la finalización
+                IntervencionesServices.loadIntervenciones(
+                    Idhabilitacion,
                     "H0001",
                     jQuery.proxy(this.SuccessCallBackInt, this),
                     jQuery.proxy(this.ErrorCallBackInt, this)
@@ -383,10 +394,22 @@ sap.ui.define([
         ErrorCallBackInt: function (error) {
             MessageBox.error("Error al cargar las habilitaciones");
         },
-        getHabilitacion: function (Idhabilitacion) {
-            var oView = this.getView();
-            HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0001", oView);
-        },
+    //    getHabilitacion: function (Idhabilitacion) {
+    //         var oView = this.getView();
+    //          HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0001", oView);
+    //     },
+    getHabilitacion: function (Idhabilitacion) {
+        var oView = this.getView();
+        return new Promise((resolve, reject) => {
+            HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0001", oView, function (error) {
+                if (error) {
+                    reject(error); // Si hay un error, rechazamos la promesa
+                } else {
+                    resolve(); // Resolviendo la promesa cuando se complete la carga
+                }
+            });
+        });
+    },
         // Habilitar o no funcionalidad de adjunto por rol
         SaveAttachmentVisibility: function (rol) {
             if (rol) {
@@ -739,15 +762,15 @@ sap.ui.define([
         },
         //Esto lo comento porque trae errores en las fechas de habilitación
         successCallbackList: function (data) {
-            /*var Habilitaciones = data.results;
-            var dateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-                pattern: "dd/MM/yyyy"
-            });
-            for (var row in Habilitaciones) {
-                Habilitaciones[row].VigenciaDate = dateFormat.format(Habilitaciones[row].Vigencia);
-            }
+            var Habilitaciones = data.results;
+            // var dateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+            //     pattern: "dd/MM/yyyy"
+            // });
+            // for (var row in Habilitaciones) {
+            //     Habilitaciones[row].VigenciaDate = dateFormat.format(Habilitaciones[row].Vigencia);
+            // }
             var viewPath = this.getView().getParent().getParent().getId();
-            sap.ui.getCore().byId(viewPath + "--Main").getModel("Habilitaciones").setProperty("/Habilitaciones", Habilitaciones);*/
+            sap.ui.getCore().byId(viewPath + "--Main").getModel("Habilitaciones").setProperty("/Habilitaciones", Habilitaciones);
         },
         errorCallbackList: function () {
             MessageBox.error("Error al obtener las habilitaciones");

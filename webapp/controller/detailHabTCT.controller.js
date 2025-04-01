@@ -386,16 +386,19 @@ sap.ui.define([
             var Intervenciones = this.getView().getModel("Intervenciones").getData().Intervenciones;
             var oDataModel = this.getView().getModel("HabilitacionModel").getData();
             var oModel = this.getView().getModel("HabilitacionModel");
-            var that = this;
-            if (!this.getView().getModel("Habilitacion")) {
+           var oHabilitacion = this.getView().getModel("Habilitacion")
+            if (!oHabilitacion) {
                 MessageBoxHelper.showAlert("Leer datos de habilitación", "Ha ocurrido un error, intente nuevamente.");
                 sap.ui.core.BusyIndicator.hide();
                 return;
                 //No funciona esto en PRD
                 //this.onBack();
             } else {
-                var sModel = this.getView().getModel("Habilitacion").getData();
+                var sModel = oHabilitacion.getData();
             }
+
+            var that = this;
+
             //Obtengo fecha nacimiento
             var getFechaNac = new Promise(function (resolve, reject) {
                 var oLegajo = that.getView().getModel("Habilitacion").getData().Legajo;
@@ -423,7 +426,7 @@ sap.ui.define([
                     oDataModel.Habilitado_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Habilitado_Nombre = Intervenciones[row].Nombre;
                     oDataModel.Habilitado_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
-                } else if ( roles.includes("hab_tct_supervisor")) {
+                } else if ( roles.includes("hab_tct_supervisor") || (roles.includes("TCT_Supervisor"))) {
                     oDataModel.Capacitacion_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Capacitacion_Nombre = Intervenciones[row].Nombre;
                     if (sModel.Hab_CETCT_nav.length > 0) {
@@ -435,14 +438,14 @@ sap.ui.define([
                     }
                     //Esto ya no se usa, lo comento 3/8/2022
                     //this.LoadTipoHabModel(oDataModel.Clase, oDataModel.Tension);
-                } else if ( roles.includes("hab_tct_med-laboral")) {
+                } else if ( roles.includes("hab_tct_med-laboral") || (roles.includes("TCT_MedLaboral"))) {
                     oDataModel.Medico_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Medico_Observacion = Intervenciones[row].Datosadicionales;
                     if (sModel.Hab_apmedico_nav.length > 0) {
                         oDataModel.Medico_Fecha = FormatHelper.formatJsonDate(sModel.Hab_apmedico_nav[0].Vigencia);
                         oDataModel.Grado_aptitud = sModel.Hab_apmedico_nav[0].Gradoap;
                     }
-                } else if ( roles.includes("hab_tct_seg-hig")) {
+                } else if ( roles.includes("hab_tct_seg-hig")|| (roles.includes("TCT_SegHigiene"))) {
                     oDataModel.Seg_higiene_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Seg_higiene_Observacion = Intervenciones[row].Datosadicionales;
                     //ISSUE 263 - TcT Seguridad e Higiene, Fecha de vencimiento.
@@ -450,7 +453,7 @@ sap.ui.define([
                     if (sModel.Hab_SeguridadHigiene_nav.length > 0) {
                         oDataModel.Seg_higiene_Fecha = FormatHelper.formatJsonDate(sModel.Hab_SeguridadHigiene_nav[0].Vigencia);
                     }
-                } else if ( roles.includes("hab_tct_ger-reg")) {
+                } else if ( roles.includes("hab_tct_ger-reg")|| (roles.includes("TCT_GerRegional"))) {
                     oDataModel.Gerente_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Gerente_Fecha = FormatHelper.formatJsonDate(sModel.Vigencia);
                     oDataModel.Gerente_Nombre = Intervenciones[row].Nombre;
@@ -619,7 +622,7 @@ sap.ui.define([
             //se fija si dentro de los roles tiene Supervisor o Gerente Regional
             var bRolEsDirectorTecnico = Roles.some(function (elem) {
                 // return elem === "TCT_Supervisor" || elem === "TCT_GerRegional";
-                  return elem === "hab_tct_supervisor" || elem === "hab_tct_ger-reg";
+                  return elem === "hab_tct_supervisor" || elem === "hab_tct_ger-reg"||elem === "TCT_Supervisor" || elem === "TCT_GerRegional";
 
             });
             if (bRolEsDirectorTecnico) {
@@ -728,7 +731,7 @@ sap.ui.define([
             var Lote = oModel.getData().Lote ? oModel.getData().Lote : habilitacion.Lote;
             var Empresa = habilitacion.Empresa === "TRANSENER" ? "100" : "300";
             var Roles = this.getView().getModel("UserJsonModelVISTA").getData().User[0].roles;
-            var Rol = Roles.find(element => element === "hab_tct_supervisor" || element === "hab_tct_reg-reg");
+            var Rol = Roles.find(element => element === "hab_tct_supervisor" || element === "hab_tct_reg-reg" ||elem === "TCT_Supervisor" || elem === "TCT_GerRegional");
             var data = {
                 Apellido: habilitacion.Apellido,
                 Area: habilitacion.Area,

@@ -321,6 +321,7 @@ sap.ui.define([
             var SelectedHabilitacion = oEvent.getSource().getBindingContext("Habilitaciones").getObject();
             var oModel = new sap.ui.model.json.JSONModel();
             oModel.setData(SelectedHabilitacion);
+            
             switch (SelectedHabilitacion.Clasehab) {
                 case "H0001":
                     NavigationHelper.to({

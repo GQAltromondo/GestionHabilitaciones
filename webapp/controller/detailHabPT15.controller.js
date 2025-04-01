@@ -22,35 +22,35 @@ sap.ui.define([
     FirmasUsuariosServices, UserService, AdjuntosServices, MotivoCambioEstadoService) {
     "use strict";
     return Controller.extend("transener.GestionHabilitaciones.controller.detailHabPT15", {
-        getBaseURL: function () {
+        // getBaseURL: function () {
 
-            debugger;
+        //     debugger;
 
-            var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
+        //     var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
 
-            //var appId = this.getManifestEntry("/sap.app/id");
-            var appPath = appId.replaceAll(".", "/");
-            var appModulePath = jQuery.sap.getModulePath(appPath);
+        //     //var appId = this.getManifestEntry("/sap.app/id");
+        //     var appPath = appId.replaceAll(".", "/");
+        //     var appModulePath = jQuery.sap.getModulePath(appPath);
 
-            var jsonModel = sap.ui.getCore().getModel("appCurrentInfo");
-            //checks if the model exists
-            if (!jsonModel) {
-                jsonModel = new sap.ui.model.json.JSONModel();
-                jsonModel.setSizeLimit(9999);
-                jsonModel.appUrl = appModulePath;
-                sap.ui.getCore().setModel(jsonModel, "appCurrentInfo");
-                //initilializing = appModulePath; 
-                jsonModel.setData({});
-            }
-            return appModulePath;
-        },
+        //     var jsonModel = sap.ui.getCore().getModel("appCurrentInfo");
+        //     //checks if the model exists
+        //     if (!jsonModel) {
+        //         jsonModel = new sap.ui.model.json.JSONModel();
+        //         jsonModel.setSizeLimit(9999);
+        //         jsonModel.appUrl = appModulePath;
+        //         sap.ui.getCore().setModel(jsonModel, "appCurrentInfo");
+        //         //initilializing = appModulePath; 
+        //         jsonModel.setData({});
+        //     }
+        //     return appModulePath;
+        // },
 
         onInit: function () {
 
-            var cUrl = this.getBaseURL();
+            // var cUrl = this.getBaseURL();
             this.getUser();
             //	this.loadUserModel();
-            this.loadFuncionesModel();
+          //  this.loadFuncionesModel();
             this.loadHabilitacionModel();
             this.loadGradoAptitud();
             this.loadStatusOptionsModel();
