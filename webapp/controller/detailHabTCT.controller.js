@@ -355,12 +355,12 @@ sap.ui.define([
             });
             this.getView().setModel(oModel, "TipoHabilitaciones");
         },*/
-        LoadIntervenciones: function (Idhabilitacion) {
+        LoadIntervenciones:async function (Idhabilitacion) {
             //var oModel = this.getView().getModel("HabilitacionModel");
             //oModel.setProperty("/Busy", true);
             sap.ui.core.BusyIndicator.show();
             if (Idhabilitacion) {
-                this.getHabilitacion(Idhabilitacion);
+                await  this.getHabilitacion(Idhabilitacion);
                 IntervencionesServices.loadIntervenciones(Idhabilitacion,
                     "H0002",
                     jQuery.proxy(this.SuccessCallBackInt, this),
@@ -471,15 +471,33 @@ sap.ui.define([
             sap.ui.core.BusyIndicator.hide();
             //oModel.setProperty("/Busy", false);
         },
+        // getHabilitacion: function (Idhabilitacion) {
+        //     var oView = this.getView();
+        //     var that = this;
+        //     HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0002", oView, function () {
+        //         that._onLoadEstaciones();
+        //         that.onLoadTareasAssing();
+        //         that.loadTipoHab.bind(that)();
+        //     });
+        // },
         getHabilitacion: function (Idhabilitacion) {
             var oView = this.getView();
             var that = this;
-            HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0002", oView, function () {
-                that._onLoadEstaciones();
-                that.onLoadTareasAssing();
-                that.loadTipoHab.bind(that)();
+            
+            return new Promise((resolve, reject) => {
+                HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0002", oView, function (error) {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        that._onLoadEstaciones();
+                        that.onLoadTareasAssing();
+                        that.loadTipoHab.bind(that)();
+                        resolve();
+                    }
+                });
             });
-        },
+        }
+,        
         formatPuesto: function (Puesto) {
             var data = sap.ui.getCore().getModel("PuestosModel").getData().PuestosModel;
             for (var i = 0; i < data.length; i++) {
@@ -489,25 +507,27 @@ sap.ui.define([
             }
         },
         formatBase: function (Base) {
-            var Empresa = this.getView().getModel("Habilitacion") ? this.getView().getModel("Habilitacion").getData().Empresa : '';
+            if (!Base) {
+                return Base; // Retorna directamente si Base es '' o undefined
+            }
+        
+            var Empresa = this.getView().getModel("Habilitacion")?.getData()?.Empresa || '';
+        
+            var Bases;
             if (Empresa === 'TRANSENER') {
-                var Bases = sap.ui.getCore().getModel("EstacionTransenerModel") ? sap.ui.getCore().getModel("EstacionTransenerModel").getData().Estaciones :
-                    '';
-            } else { //TRANSBA
-                var Bases = sap.ui.getCore().getModel("EstacionTransbaModel") ? sap.ui.getCore().getModel("EstacionTransbaModel").getData().Estaciones :
-                    '';
+                Bases = sap.ui.getCore().getModel("EstacionTransenerModel")?.getData()?.Estaciones || [];
+            } else { // TRANSBA
+                Bases = sap.ui.getCore().getModel("EstacionTransbaModel")?.getData()?.Estaciones || [];
             }
-            //Fix para que no rompa cuando no trae datos el servicio de las bases (EstacionesSet) 12/10/21
-            if (Bases.length !== 0) {
-                var aSelectedBase = Bases.filter((item) => {
-                    return item.Codigo === Base;
-                });
-                var oSelectedBase = aSelectedBase[0];
-                return oSelectedBase.Codigo + " - " + oSelectedBase.Descripcion;
-            } else {
-                return Base;
+        
+            if (Bases.length > 0) {
+                var oSelectedBase = Bases.find(item => item.Codigo === Base);
+                return oSelectedBase ? `${oSelectedBase.Codigo} - ${oSelectedBase.Descripcion}` : Base;
             }
+        
+            return Base;
         },
+        
         formatDateTime: function (date, time) {
             if (date !== undefined && time !== undefined && date !== null && time !== null) {
                 var dateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({

@@ -476,8 +476,8 @@ sap.ui.define([
                 return false;
             }
         },
-        LoadIntervenciones: function (Idhabilitacion) {
-            this.getHabilitacion(Idhabilitacion);
+        LoadIntervenciones: async function (Idhabilitacion) {
+            await this.getHabilitacion(Idhabilitacion);
             if (Idhabilitacion) {
                 IntervencionesServices.loadIntervenciones(Idhabilitacion,
                     "H0003",
@@ -502,8 +502,18 @@ sap.ui.define([
         },
         getHabilitacion: function (Idhabilitacion) {
             var oView = this.getView();
-            HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0003", oView);
-        },
+            
+            return new Promise((resolve, reject) => {
+                HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0003", oView, function (error) {
+                    if (error) {
+                        reject(error); 
+                    } else {
+                        resolve(); 
+                    }
+                });
+            });
+        }
+        ,
         onBindingIntervenciones: function () {
             var Intervenciones = this.getView().getModel("Intervenciones").getData().Intervenciones;
             var oDataModel = this.getView().getModel("HabilitacionModel").getData();

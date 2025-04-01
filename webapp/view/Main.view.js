@@ -408,6 +408,9 @@ sap.ui.jsview("transener.GestionHabilitaciones.view.Main", {
                     busy: "{Habilitaciones>/Busy}",
                     busyIndicatorDelay: 0,
                     mode: sap.m.ListMode.MultiSelect,
+                    growing: "true",
+                    growingThreshold: 50,
+                    growingScrollToLoad: true,
                     columns: [
                         new sap.m.Column({
                             header: [
