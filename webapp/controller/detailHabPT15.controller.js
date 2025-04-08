@@ -22,32 +22,11 @@ sap.ui.define([
     FirmasUsuariosServices, UserService, AdjuntosServices, MotivoCambioEstadoService) {
     "use strict";
     return Controller.extend("transener.GestionHabilitaciones.controller.detailHabPT15", {
-        // getBaseURL: function () {
-
-        //     debugger;
-
-        //     var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
-
-        //     //var appId = this.getManifestEntry("/sap.app/id");
-        //     var appPath = appId.replaceAll(".", "/");
-        //     var appModulePath = jQuery.sap.getModulePath(appPath);
-
-        //     var jsonModel = sap.ui.getCore().getModel("appCurrentInfo");
-        //     //checks if the model exists
-        //     if (!jsonModel) {
-        //         jsonModel = new sap.ui.model.json.JSONModel();
-        //         jsonModel.setSizeLimit(9999);
-        //         jsonModel.appUrl = appModulePath;
-        //         sap.ui.getCore().setModel(jsonModel, "appCurrentInfo");
-        //         //initilializing = appModulePath; 
-        //         jsonModel.setData({});
-        //     }
-        //     return appModulePath;
-        // },
+     
 
         onInit: function () {
 
-            // var cUrl = this.getBaseURL();
+           
             this.getUser();
             //	this.loadUserModel();
           //  this.loadFuncionesModel();
@@ -69,7 +48,7 @@ sap.ui.define([
         },
 
         loadUserModel: function (callback) {
-            debugger;
+          
             var UserDataService = this;
             this.callback = callback;
             //reads user api
@@ -133,7 +112,7 @@ sap.ui.define([
                                 var oModelUser = new sap.ui.model.json.JSONModel();
                                 oModelUser.setData(data.Resources);
 
-                                debugger;
+                            
                                 var aDatosUsuario = that.armarDatos(data.Resources);
 
                                 oModel.setData(aDatosUsuario);
@@ -145,7 +124,7 @@ sap.ui.define([
                                 console.log(data);
                                 console.log(xhr);
                                 console.log(textStatus);
-                                debugger;
+                          
                                 window.alert("error");
                             }
                         });
@@ -163,9 +142,9 @@ sap.ui.define([
 
         armarDatos: function (datos) {
 
-            debugger;
+      
 
-            var aGroupsTemporal = datos[0].groups;
+            var aGroupsTemporal = datos[0].corporateGroups ? datos[0].corporateGroups : datos[0].groups;
 
             var aGroups = aGroupsTemporal.map(function (fila) {
                 return fila.display;
@@ -246,7 +225,7 @@ sap.ui.define([
                                 var oModelUser = new sap.ui.model.json.JSONModel();
                                 oModelUser.setData(data.Resources);
 
-                                debugger;
+                           
                                 var aDatosUsuario = that.armarDatos(data.Resources);
 
                                 oModel.setData(aDatosUsuario);
@@ -257,7 +236,7 @@ sap.ui.define([
                                 console.log(data);
                                 console.log(xhr);
                                 console.log(textStatus);
-                                debugger;
+                         
                                 window.alert("error");
                             }
                         });

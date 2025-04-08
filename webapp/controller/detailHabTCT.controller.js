@@ -30,7 +30,7 @@ sap.ui.define([
     return Controller.extend("transener.GestionHabilitaciones.controller.detailHabTCT", {
         getBaseURL: function () {
 
-            debugger;
+          
 
             var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
 
@@ -73,9 +73,9 @@ sap.ui.define([
         },
         armarDatos: function (datos) {
 
-            debugger;
+         
 
-            var aGroupsTemporal = datos[0].groups;
+            var aGroupsTemporal = datos[0].corporateGroups ? datos[0].corporateGroups : datos[0].groups;
 
             var aGroups = aGroupsTemporal.map(function (fila) {
                 return fila.display;
@@ -156,7 +156,7 @@ sap.ui.define([
                                 var oModelUser = new sap.ui.model.json.JSONModel();
                                 oModelUser.setData(data.Resources);
 
-                                debugger;
+                        
                                 var aDatosUsuario = that.armarDatos(data.Resources);
 
                                 oModel.setData(aDatosUsuario);
@@ -167,7 +167,7 @@ sap.ui.define([
                                 console.log(data);
                                 console.log(xhr);
                                 console.log(textStatus);
-                                debugger;
+                            
                                 window.alert("error");
                             }
                         });
@@ -355,12 +355,12 @@ sap.ui.define([
             });
             this.getView().setModel(oModel, "TipoHabilitaciones");
         },*/
-        LoadIntervenciones:async function (Idhabilitacion) {
+        LoadIntervenciones: async function (Idhabilitacion) {
             //var oModel = this.getView().getModel("HabilitacionModel");
             //oModel.setProperty("/Busy", true);
             sap.ui.core.BusyIndicator.show();
             if (Idhabilitacion) {
-                await  this.getHabilitacion(Idhabilitacion);
+                await this.getHabilitacion(Idhabilitacion);
                 IntervencionesServices.loadIntervenciones(Idhabilitacion,
                     "H0002",
                     jQuery.proxy(this.SuccessCallBackInt, this),
@@ -386,7 +386,7 @@ sap.ui.define([
             var Intervenciones = this.getView().getModel("Intervenciones").getData().Intervenciones;
             var oDataModel = this.getView().getModel("HabilitacionModel").getData();
             var oModel = this.getView().getModel("HabilitacionModel");
-           var oHabilitacion = this.getView().getModel("Habilitacion")
+            var oHabilitacion = this.getView().getModel("Habilitacion")
             if (!oHabilitacion) {
                 MessageBoxHelper.showAlert("Leer datos de habilitación", "Ha ocurrido un error, intente nuevamente.");
                 sap.ui.core.BusyIndicator.hide();
@@ -426,7 +426,7 @@ sap.ui.define([
                     oDataModel.Habilitado_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Habilitado_Nombre = Intervenciones[row].Nombre;
                     oDataModel.Habilitado_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
-                } else if ( roles.includes("hab_tct_supervisor") || (roles.includes("TCT_Supervisor"))) {
+                } else if (roles.includes("hab_tct_supervisor") || (roles.includes("TCT_Supervisor"))) {
                     oDataModel.Capacitacion_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Capacitacion_Nombre = Intervenciones[row].Nombre;
                     if (sModel.Hab_CETCT_nav.length > 0) {
@@ -438,25 +438,26 @@ sap.ui.define([
                     }
                     //Esto ya no se usa, lo comento 3/8/2022
                     //this.LoadTipoHabModel(oDataModel.Clase, oDataModel.Tension);
-                } else if ( roles.includes("hab_tct_med-laboral") || (roles.includes("TCT_MedLaboral"))) {
+                } else if (roles.includes("hab_tct_med-laboral") || (roles.includes("TCT_MedLaboral"))) {
                     oDataModel.Medico_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Medico_Observacion = Intervenciones[row].Datosadicionales;
                     if (sModel.Hab_apmedico_nav.length > 0) {
                         oDataModel.Medico_Fecha = FormatHelper.formatJsonDate(sModel.Hab_apmedico_nav[0].Vigencia);
                         oDataModel.Grado_aptitud = sModel.Hab_apmedico_nav[0].Gradoap;
                     }
-                } else if ( roles.includes("hab_tct_seg-hig")|| (roles.includes("TCT_SegHigiene"))) {
+                } else if (roles.includes("hab_tct_seg-hig") || (roles.includes("TCT_SegHigiene"))) {
                     oDataModel.Seg_higiene_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Seg_higiene_Observacion = Intervenciones[row].Datosadicionales;
                     //ISSUE 263 - TcT Seguridad e Higiene, Fecha de vencimiento.
-                    //oDataModel.Seg_higiene_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechacreacion);
-                    if (sModel.Hab_SeguridadHigiene_nav.length > 0) {
-                        oDataModel.Seg_higiene_Fecha = FormatHelper.formatJsonDate(sModel.Hab_SeguridadHigiene_nav[0].Vigencia);
-                    }
-                } else if ( roles.includes("hab_tct_ger-reg")|| (roles.includes("TCT_GerRegional"))) {
+                    oDataModel.Seg_higiene_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
+                    // if (sModel.Hab_SeguridadHigiene_nav.length > 0) {
+                    //     oDataModel.Seg_higiene_Fecha = FormatHelper.formatJsonDate(sModel.Hab_SeguridadHigiene_nav[0].Vigencia);
+                    // }
+                } else if (roles.includes("hab_tct_ger-reg") || (roles.includes("TCT_GerRegional"))) {
                     oDataModel.Gerente_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Gerente_Fecha = FormatHelper.formatJsonDate(sModel.Vigencia);
                     oDataModel.Gerente_Nombre = Intervenciones[row].Nombre;
+
                 }
             }
             oDataModel.Lote = sModel.Lote;
@@ -483,7 +484,7 @@ sap.ui.define([
         getHabilitacion: function (Idhabilitacion) {
             var oView = this.getView();
             var that = this;
-            
+
             return new Promise((resolve, reject) => {
                 HabilitacionServices.loadHabilitacion(Idhabilitacion, "H0002", oView, function (error) {
                     if (error) {
@@ -497,7 +498,7 @@ sap.ui.define([
                 });
             });
         }
-,        
+        ,
         formatPuesto: function (Puesto) {
             var data = sap.ui.getCore().getModel("PuestosModel").getData().PuestosModel;
             for (var i = 0; i < data.length; i++) {
@@ -510,24 +511,24 @@ sap.ui.define([
             if (!Base) {
                 return Base; // Retorna directamente si Base es '' o undefined
             }
-        
+
             var Empresa = this.getView().getModel("Habilitacion")?.getData()?.Empresa || '';
-        
+
             var Bases;
             if (Empresa === 'TRANSENER') {
                 Bases = sap.ui.getCore().getModel("EstacionTransenerModel")?.getData()?.Estaciones || [];
             } else { // TRANSBA
                 Bases = sap.ui.getCore().getModel("EstacionTransbaModel")?.getData()?.Estaciones || [];
             }
-        
+
             if (Bases.length > 0) {
                 var oSelectedBase = Bases.find(item => item.Codigo === Base);
                 return oSelectedBase ? `${oSelectedBase.Codigo} - ${oSelectedBase.Descripcion}` : Base;
             }
-        
+
             return Base;
         },
-        
+
         formatDateTime: function (date, time) {
             if (date !== undefined && time !== undefined && date !== null && time !== null) {
                 var dateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -543,7 +544,7 @@ sap.ui.define([
             }
         },
         formatterClase: function (rol, estado) {
-            if (rol.includes("TCT_Supervisor") && estado === 'H' || rol.includes("hab_tct_supervisor" && estado === "H")) { //Si es supervisor_TCT y el estado es "Habilitado"
+            if (rol.includes("hab_tct_supervisor" && estado === "H")) { //Si es supervisor_TCT y el estado es "Habilitado"
                 return true;
             } else {
                 return false;
@@ -642,7 +643,7 @@ sap.ui.define([
             //se fija si dentro de los roles tiene Supervisor o Gerente Regional
             var bRolEsDirectorTecnico = Roles.some(function (elem) {
                 // return elem === "TCT_Supervisor" || elem === "TCT_GerRegional";
-                  return elem === "hab_tct_supervisor" || elem === "hab_tct_ger-reg"||elem === "TCT_Supervisor" || elem === "TCT_GerRegional";
+                return elem === "hab_tct_supervisor" || elem === "hab_tct_ger-reg" || elem === "TCT_Supervisor" || elem === "TCT_GerRegional";
 
             });
             if (bRolEsDirectorTecnico) {
@@ -751,7 +752,7 @@ sap.ui.define([
             var Lote = oModel.getData().Lote ? oModel.getData().Lote : habilitacion.Lote;
             var Empresa = habilitacion.Empresa === "TRANSENER" ? "100" : "300";
             var Roles = this.getView().getModel("UserJsonModelVISTA").getData().User[0].roles;
-            var Rol = Roles.find(element => element === "hab_tct_supervisor" || element === "hab_tct_reg-reg" ||elem === "TCT_Supervisor" || elem === "TCT_GerRegional");
+            var Rol = Roles.find(element => element === "hab_tct_supervisor" || element === "hab_tct_reg-reg");
             var data = {
                 Apellido: habilitacion.Apellido,
                 Area: habilitacion.Area,
@@ -826,6 +827,8 @@ sap.ui.define([
             var oModel = this.getView().getModel("HabilitacionModel");
             oModel.setProperty("/Busy", false);
             sap.m.MessageToast.show("Se ha cambiado el estado de la habilitación");
+            this.loadMotivoCambioEstado()
+
         },
         onErrorCallbackMotivo: function () {
             var oModel = this.getView().getModel("HabilitacionModel");
@@ -851,13 +854,23 @@ sap.ui.define([
             );
         },
         successCallbackMotivoList: function (data) {
-            var oModelHab = this.getView().getModel("HabilitacionModel");
+            var oView = this.getView();
+
+            var oModelHab = oView.getModel("HabilitacionModel");
             oModelHab.setProperty("/Busy", false);
-            //Agrega los nuevos comentarios al modelo
-            var oModel = new sap.ui.model.json.JSONModel();
-            oModel.setData(data);
-            this.getView().setModel(oModel, "MotivoCambioEstadoModel");
+
+
+            var oMotivoModel = oView.getModel("MotivoCambioEstadoModel");
+
+            if (oMotivoModel) {
+
+                oMotivoModel.setData(data);
+            } else {
+                oMotivoModel = new sap.ui.model.json.JSONModel(data);
+                oView.setModel(oMotivoModel, "MotivoCambioEstadoModel");
+            }
         },
+
         errorCallbackMotivoList: function () {
             var oModelHab = this.getView().getModel("HabilitacionModel");
             oModelHab.setProperty("/Busy", false);
@@ -871,7 +884,7 @@ sap.ui.define([
                 if (
                     rol.includes("TCT_GerRegional") ||
                     rol.includes("TCT_Supervisor") ||
-                    rol.includes("hab_tct_ger-reg")||
+                    rol.includes("hab_tct_ger-reg") ||
                     rol.includes("hab_tct_supervisor")
                 ) {
                     return true;
@@ -1007,8 +1020,8 @@ sap.ui.define([
                 if (
                     rol.includes("Director_Tecnico") ||
                     rol.includes("TCT_GerRegional") ||
-                    rol.includes("TCT_Supervisor")||
-                    rol.includes("hab_tct_ger-reg")||
+                    rol.includes("TCT_Supervisor") ||
+                    rol.includes("hab_tct_ger-reg") ||
                     rol.includes("hab_tct_supervisor")
                 ) {
                     return true;
@@ -1363,9 +1376,9 @@ sap.ui.define([
             }
         },
         RolFormatter: function (rol) {
-            if (rol.includes("TCT_Supervisor")||rol.includes("hab_tct_supervisor")) {
+            if (rol.includes("hab_tct_supervisor")) {
                 return "Supervisor";
-            } else if (rol.includes("TCT_GerRegional")|| rol.includes("hab_tct_reg-reg")) {
+            } else if (rol.includes("hab_tct_reg-reg")) {
                 return "Gerente Regional";
             } else {
                 return rol;

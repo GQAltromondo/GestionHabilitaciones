@@ -104,7 +104,7 @@ sap.ui.define([
 								console.log(data);
 								console.log(xhr);
 								console.log(textStatus);
-								debugger;
+							
 								window.alert("error");
 							}
 						});

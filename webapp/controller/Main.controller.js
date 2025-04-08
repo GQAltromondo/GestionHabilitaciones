@@ -19,7 +19,7 @@ sap.ui.define([
 
         getBaseURL: function () {
 
-            debugger;
+         
 
             var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
 

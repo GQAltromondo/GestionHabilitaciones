@@ -26,12 +26,8 @@ sap.ui.define([
     "use strict";
     return Controller.extend("transener.GestionHabilitaciones.controller.detailHabMTO", {
         getBaseURL: function () {
+               var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
 
-            debugger;
-
-            var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
-
-            //var appId = this.getManifestEntry("/sap.app/id");
             var appPath = appId.replaceAll(".", "/");
             var appModulePath = jQuery.sap.getModulePath(appPath);
 
@@ -779,6 +775,7 @@ sap.ui.define([
             var oModel = this.getView().getModel("HabilitacionModel");
             oModel.setProperty("/Busy", false);
             sap.m.MessageToast.show("Se ha cambiado el estado de la habilitación");
+            this.loadMotivoCambioEstado();
         },
         onErrorCallbackMotivo: function () {
             var oModel = this.getView().getModel("HabilitacionModel");
@@ -812,13 +809,21 @@ sap.ui.define([
             );
         },
         successCallbackMotivoList: function (data) {
-            var oModelHab = this.getView().getModel("HabilitacionModel");
+            var oView = this.getView();
+            var oModelHab = oView.getModel("HabilitacionModel");
             oModelHab.setProperty("/Busy", false);
-            //Agrega los nuevos comentarios al modelo
-            var oModel = new sap.ui.model.json.JSONModel();
-            oModel.setData(data);
-            this.getView().setModel(oModel, "MotivoCambioEstadoModel");
+  
+            var oMotivoModel = oView.getModel("MotivoCambioEstadoModel");
+
+            if (oMotivoModel) {
+             
+                oMotivoModel.setData(data);
+            } else {   // Si no existe, crear uno nuevo y asignarlo
+                oMotivoModel = new sap.ui.model.json.JSONModel(data);
+                oView.setModel(oMotivoModel, "MotivoCambioEstadoModel");
+            }
         },
+
         errorCallbackMotivoList: function () {
             var oModelHab = this.getView().getModel("HabilitacionModel");
             oModelHab.setProperty("/Busy", false);
