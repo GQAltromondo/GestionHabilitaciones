@@ -432,29 +432,29 @@ sap.ui.define([
             for (var row in Intervenciones) {
                 var roles = Intervenciones[row].Rol;
                 if (!roles) continue;
-                if (roles.includes("hab_solicitud_habilitaciones")) {
+                if (roles.includes("hab_solicitud_habilitaciones") ||roles.includes("Mantenimiento_Solicitante") ) {
                     oDataModel.Solicitante_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Solicitante_Nombre = Intervenciones[row].Nombre;
                     oDataModel.Solicitante_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
-                } else if (roles.includes("hab_mto_seg-hig")) {
+                } else if (roles.includes("hab_mto_seg-hig") || roles.includes("Mantenimiento_SegHigiene")) {
                     oDataModel.SegHigiene_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.SegHigiene_Nombre = Intervenciones[row].Nombre;
                     oDataModel.SegHigiene_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
-                } else if (roles.includes("hab_mto_seg-pub")) {
+                } else if (roles.includes("hab_mto_seg-pub")|| roles.includes("Mantenimiento_SegPublica")) {
                     oDataModel.SegPublica_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.SegPublica_Nombre = Intervenciones[row].Nombre;
                     oDataModel.SegPublica_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
-                } else if (roles.includes("hab_mto_ger-reg")) {
+                } else if (roles.includes("hab_mto_ger-reg")|| roles.includes("Mantenimiento_GerRegional")) {
                     var Habilitacion = this.getView().getModel("Habilitacion").getData();
                     oDataModel.GerRegional_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.GerRegional_Nombre = Intervenciones[row].Nombre;
                     oDataModel.GerRegional_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
                     oDataModel.GerRegional_Fecha_vencimiento = FormatHelper.formatJsonDate(Habilitacion.Vigencia);
-                } else if (roles.includes("hab_mto_capacitacion")) {
+                } else if (roles.includes("hab_mto_capacitacion")|| roles.includes("Mantenimiento_Capacitacion")) {
                     oDataModel.Capacitacion_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
                     oDataModel.Capacitacion_Nombre = Intervenciones[row].Nombre;
                     oDataModel.Capacitacion_Fecha = FormatHelper.formatJsonDate(Intervenciones[row].Fechaint);
-                } else if (roles.includes("hab_mto_secretaria")) {
+                } else if (roles.includes("hab_mto_secretaria")|| roles.includes("Mantenimiento_Secretaria")) {
                     //punto 1
                     if (Intervenciones[row].Legajo !== '00000000') {
                         oDataModel.Secretaria_Firma = "data:image/gif;base64," + Intervenciones[row].Firma;
