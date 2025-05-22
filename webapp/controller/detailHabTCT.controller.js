@@ -1180,7 +1180,7 @@ sap.ui.define([
             }
             if (rol) {
                 if (
-                    rol.includes("TCT_Supervisor")
+                    rol.includes("hab_tct_supervisor")
                 ) {
                     return true;
                 } else {
@@ -1251,7 +1251,7 @@ sap.ui.define([
                 "Idhabilitacion": oHab.Idhabilitacion,
                 "Legajo": oHab.Interno ? oHab.Legajo : oHab.Documento,
                 "Nombre": "",
-                "Rol": "TCT_Supervisor",
+                "Rol": "hab_tct_supervisor",
                 "Usuario": ""
             };
             IntervencionesServices.SaveIntervenciones(data,
@@ -1277,7 +1277,7 @@ sap.ui.define([
                         "Nombre": Files[row].name,
                         "Archivo": Files[row].binary,
                         "Doctype": Files[row].type,
-                        "Rol": "TCT_Supervisor",
+                        "Rol": "hab_tct_supervisor",
                         "Idadjuntos": Idadjuntos,
                         "Complementario": true
                     };
@@ -1341,7 +1341,7 @@ sap.ui.define([
         },
         SaveAttachmentVisibility: function (rol) {
             if (rol) {
-                if (rol.includes("TCT_Supervisor")) {
+                if (rol.includes("hab_tct_supervisor")) {
                     return true;
                 } else {
                     return false;
