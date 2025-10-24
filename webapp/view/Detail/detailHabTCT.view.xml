@@ -293,6 +293,13 @@
 												</f:formContainers>
 											</f:Form>
 										</HBox>
+										<HBox class="colorGray" direction="Column" width="auto" height="auto" renderType="Div" visible="true" displayInline="false" justifyContent="SpaceBetween">
+											<items>
+												<Text text="{i18n>Comentarios}" class="sapUiSmallMarginBegin commentsText"/>
+												<TextArea rows="3" value="{HabilitacionModel>/Seg_higiene_Comentario}" class="sapUiSmallMarginBegin" width="90%"/>
+																					</items>
+											<layoutData/>
+										</HBox>
 										<HBox alignItems="Start" direction="Column" fitContainer="false" justifyContent="End" class="sapUiSmallMarginTop" renderType="Div"
 											visible="true" displayInline="false">
 											<items>

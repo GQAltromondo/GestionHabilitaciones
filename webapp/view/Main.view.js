@@ -498,26 +498,10 @@ sap.ui.jsview("transener.GestionHabilitaciones.view.Main", {
                                         path: 'Habilitaciones>Estado'
                                     }, {
                                         path: 'Habilitaciones>Lote'
-                                    }],
-                                    formatter: function (Estado, Lote) {
-                                        if (Estado === "N") {
-                                            return "Nueva Habilitación";
-                                        } else if (Estado === "H") {
-                                            return "Habilitado";
-                                        } else if (Estado === "D") {
-                                            return "Revocado";
-                                        } else if (Estado === "S") {
-                                            return "Suspendido";
-                                        } else if (Estado === "P") {
-                                            return "Pendiente Gestión de Calidad";
-                                        } else if (Estado === "C") {
-                                            return "Cancelado";
-                                        } else if (Estado === "A") {
-                                            return "Pendiente Auditoría Externa";
-                                        }
-                                        return Estado;
+                                    }],                                 
+                                        formatter: oController.formatEstado.bind(oController)
                                     }
-                                }
+                                
                             }),
                             new sap.m.Text({
                                 text: "{Habilitaciones>Empresa}"

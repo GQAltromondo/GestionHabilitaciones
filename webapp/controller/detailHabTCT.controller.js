@@ -21,11 +21,12 @@ sap.ui.define([
     "transener/GestionHabilitaciones/services/FirmasUsuariosServices",
     "transener/GestionHabilitaciones/services/AdjuntosServices",
     "transener/GestionHabilitaciones/services/MotivoCambioEstadoService",
-    "transener/GestionHabilitaciones/services/PersonalInternoServices"
+    "transener/GestionHabilitaciones/services/PersonalInternoServices",
+    "transener/GestionHabilitaciones/services/ComentariosHabilitacionesService"
 ], function (Controller, MessageBox, NavigationHelper, FormatHelper, FileDownloadHelper, MessageBoxHelper,
     PrintAndDownloadHelper, IntervencionesServices, HabilitacionServices, RegionServices, HabTecnicasService,
     EstacionesServices, TareasTCTService, GestionTareasTCTService, TipoHabilitacionServices,
-    UserService, PuestosServices, FirmasUsuariosServices, AdjuntosServices, MotivoCambioEstadoService, PersonalInternoServices) {
+    UserService, PuestosServices, FirmasUsuariosServices, AdjuntosServices, MotivoCambioEstadoService, PersonalInternoServices,ComentariosHabilitacionesService) {
     "use strict";
     return Controller.extend("transener.GestionHabilitaciones.controller.detailHabTCT", {
         getBaseURL: function () {
@@ -377,11 +378,37 @@ sap.ui.define([
                 Intervenciones: Intervenciones
             });
             this.getView().setModel(oModel, "Intervenciones");
+            this.loadComments()
             this.onBindingIntervenciones();
+          
         },
         ErrorCallBackInt: function (error) {
             MessageBox.error("Error al cargar las intervenciones");
         },
+        loadComments: function () {
+           
+            var oHabilitacion = this.getView().getModel("Habilitacion").getData();
+            var filters = {
+                "id": oHabilitacion.Idhabilitacion,
+                "empresa": oHabilitacion.Empresa === "TRANSENER" ? "100" : "300",
+                "Clasehab": "H0002"
+            };
+            ComentariosHabilitacionesService.getComments(filters,
+                jQuery.proxy(this.SuccessGetCommentHab, this),
+                jQuery.proxy(this.ErrorGetCommentHab, this)
+            );
+        },
+        SuccessGetCommentHab: function (data) {
+            console.log(data);
+            var oModel = this.getView().getModel("HabilitacionModel");
+            var oData = oModel.getData();
+            
+            oData.Seg_higiene_Comentario = data.results?.[0]?.Comentarios || "";
+            
+            oModel.setData(oData); // Refresca el modelo con los nuevos datos
+        },
+        
+        
         onBindingIntervenciones: function () {
             var Intervenciones = this.getView().getModel("Intervenciones").getData().Intervenciones;
             var oDataModel = this.getView().getModel("HabilitacionModel").getData();
@@ -544,12 +571,10 @@ sap.ui.define([
             }
         },
         formatterClase: function (rol, estado) {
-            if (rol.includes("hab_tct_supervisor" && estado === "H")) { //Si es supervisor_TCT y el estado es "Habilitado"
-                return true;
-            } else {
-                return false;
-            }
+          //  return rol.includes("hab_tct_supervisor") && estado === "H";
+            return rol.includes("hab_tct_supervisor") ;
         },
+        
         StatusFormatter: function (Estado) {
             if (Estado === "H") {
                 return "Habilitado";

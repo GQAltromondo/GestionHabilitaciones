@@ -133,6 +133,7 @@ sap.ui.define([
             return Estado;
         },
 
+
         formatRegion: function (code, arr) {
             if (!code) return "";
             if (!arr) return "";
