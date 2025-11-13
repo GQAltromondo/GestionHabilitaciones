@@ -1269,7 +1269,6 @@ sap.ui.define([
             var data = {
                 "Accion": "",
                 "Clasehab": "H0002",
-                "Fechacreacion": new Date(),
                 "Fechaint": date,
                 "Firma": FirmaUser,
                 "Horaint": time,
