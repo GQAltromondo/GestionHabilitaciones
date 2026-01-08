@@ -552,7 +552,7 @@ sap.ui.define([
                 "Nombre": habilitacion.Secretaria_Nombre,
                 "Idhabilitacion": habilitacion.Idhabilitacion,
                 "Clasehab": "H0001",
-                "Fechacreacion": new Date(),
+                // "Fechacreacion": new Date(),
                 "Rol": "hab_mto_secretaria",
                 "Fechaint": date,
                 "Horaint": time,
