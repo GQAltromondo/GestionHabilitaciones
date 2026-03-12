@@ -362,6 +362,18 @@
                     threshold="50"
                     rows="{path: 'Habilitaciones>/Habilitaciones'}"
                     rowActionCount="1">
+                      <t:contextMenu>
+                                    <Menu>
+                                        <!-- Adjuntar archivo -->
+                                        <MenuItem
+                                            text="Duplicar Habilitacion"
+                                            icon="sap-icon://attachment"
+                                            press="onDuplicateHab"
+                                            enabled="{editableModel>/isEditable}"
+                                        />
+
+                                    </Menu>
+                                </t:contextMenu>
                     <t:columns>
                         <t:Column><t:label><Label text="{i18n>Idhabilitacion}"/></t:label><t:template><Text text="{Habilitaciones>Idhabilitacion}"/></t:template></t:Column>
                         <t:Column><t:label><Label text="{i18n>Estado}"/></t:label><t:template><Text text="{parts: [{path: 'Habilitaciones>Estado'}, {path: 'Habilitaciones>Lote'}], formatter: '.formatEstado'}"/></t:template></t:Column>
