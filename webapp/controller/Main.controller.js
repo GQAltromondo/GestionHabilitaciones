@@ -352,6 +352,8 @@ sap.ui.define([
 
         onDuplicateHab: function () {
             var oHab = this._oContextItem.getBindingContext("Habilitaciones").getObject();
+            var sNomenclatura = oHab.Empresa.toUpperCase().includes("TRANSENER") ? "MB" : "MR";
+            var sNumero = oHab.Idhabilitacion.replace(/[^0-9]/g, "");
             var oDuplicarModel = new sap.ui.model.json.JSONModel({
                 Apellido: oHab.Apellido,
                 Area: oHab.Area,
@@ -373,8 +375,8 @@ sap.ui.define([
                 Estado: oHab.Estado,
                 Idhabilitacion: oHab.Idhabilitacion,
                 // Campos para la nueva habilitación
-                Nomenclatura: "MR",
-                NuevoNumero: "",
+                Nomenclatura: sNomenclatura,
+                NuevoNumero: sNumero,
                 NuevaArea: ""
             });
             this.getView().setModel(oDuplicarModel, "DuplicarModel");
