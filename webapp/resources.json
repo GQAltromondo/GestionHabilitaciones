@@ -17,6 +17,9 @@
             "name": "view/Main.view.js"
         },
         {
+            "name": "view/Main.view.xml"
+        },
+        {
             "name": "view/App.view.js"
         },
         {
