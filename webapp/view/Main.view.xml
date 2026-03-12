@@ -1,0 +1,411 @@
+<mvc:View
+    controllerName="transener.GestionHabilitaciones.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core">
+
+    <Page
+        title="{i18n>appTitle}"
+        showHeader="false"
+        backgroundDesign="Solid">
+
+        <footer>
+            <Bar>
+                <contentLeft>
+                    <Button
+                        icon="sap-icon://information"
+                        type="Emphasized"
+                        press=".onAbout"/>
+                </contentLeft>
+                <contentRight>
+                    <Button
+                        icon="sap-icon://download"
+                        type="Emphasized"
+                        text="{i18n>Descargar}"
+                        press=".exportTable"/>
+                </contentRight>
+            </Bar>
+        </footer>
+
+        <content>
+            <VBox class="sapUiMediumMargin customTable">
+
+                <Title
+                    text="{i18n>appTitle}"
+                    titleStyle="H3"
+                    level="H3"
+                    class="textBlue"/>
+
+                <!-- Panel Filtros Frontend -->
+                <Panel
+                    expandable="true"
+                    expanded="false"
+                    class="customPanel">
+                    <headerToolbar>
+                        <Toolbar>
+                            <core:Icon src="sap-icon://filter" class="textBlue"/>
+                            <Title
+                                titleStyle="H5"
+                                level="H5"
+                                text="{i18n>Filtros}"
+                                class="textBlue"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <content>
+                        <f:Form editable="true">
+                            <f:layout>
+                                <f:ResponsiveGridLayout/>
+                            </f:layout>
+                            <f:formContainers>
+                                <f:FormContainer>
+                                    <f:formElements/>
+                                </f:FormContainer>
+                                <f:FormContainer>
+                                    <f:formElements>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Empresa}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <Input
+                                                    valueLiveUpdate="true"
+                                                    placeholder="{i18n>Empresa}"
+                                                    value="{FiltersModel>/Empresa}"
+                                                    liveChange=".onSearch"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>func}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <ComboBox
+                                                    placeholder="Seleccionar"
+                                                    selectedKey="{FiltersModel>/Lote}"
+                                                    change=".onSearch"
+                                                    items="{path: 'FuncionOptionsModel>/funciones'}">
+                                                    <core:Item key="{FuncionOptionsModel>key}" text="{FuncionOptionsModel>text}"/>
+                                                </ComboBox>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Nombre}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <Input
+                                                    valueLiveUpdate="true"
+                                                    placeholder="{i18n>Nombre}"
+                                                    value="{FiltersModel>/Nombre}"
+                                                    liveChange=".onSearch"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>textRegion}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <ComboBox
+                                                    selectedKey="{FiltersModel>/Area}"
+                                                    change=".onSearch"
+                                                    placeholder="Seleccionar"
+                                                    items="{path: 'AllRegiones>/Regiones'}">
+                                                    <core:Item key="{AllRegiones>Codigo}" text="{AllRegiones>Region}"/>
+                                                </ComboBox>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>VencimientoDeHabilitacion}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <DatePicker
+                                                    dateValue="{FiltersModel>/Vigencia}"
+                                                    placeholder="{i18n>VencimientoDeHabilitacion}"
+                                                    displayFormat="dd/MM/yyyy"
+                                                    change=".onSearch"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Estado}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <ComboBox
+                                                    selectedKey="{FiltersModel>/Estado}"
+                                                    change=".onSearch"
+                                                    placeholder="Seleccionar">
+                                                    <core:Item key="N" text="Nueva Habilitacion"/>
+                                                    <core:Item key="H" text="Habilitado"/>
+                                                    <core:Item key="D" text="Revocado"/>
+                                                    <core:Item key="S" text="Suspendido"/>
+                                                    <core:Item key="P" text="Pendiente Gestion de Calidad"/>
+                                                    <core:Item key="F" text="Finalizado"/>
+                                                    <core:Item key="A" text="Pendiente Auditoria Externa"/>
+                                                    <core:Item key="C" text="Cancelado"/>
+                                                </ComboBox>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Base}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <ComboBox
+                                                    selectedKey="{FiltersModel>/Base}"
+                                                    change=".onSearch"
+                                                    placeholder="Seleccionar"
+                                                    items="{path: 'EstacionModel>/Estaciones'}">
+                                                    <core:Item key="{EstacionModel>Estacion}" text="{EstacionModel>Codigo} - {EstacionModel>Descripcion}"/>
+                                                </ComboBox>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>FechaCreacion}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <DatePicker
+                                                    dateValue="{FiltersModel>/FechaCreacion}"
+                                                    placeholder="{i18n>FechaCreacion}"
+                                                    displayFormat="dd/MM/yyyy"
+                                                    change=".onSearch"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>VtoApto}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <DatePicker
+                                                    dateValue="{FiltersModel>/VtoApto}"
+                                                    placeholder="{i18n>VtoApto}"
+                                                    displayFormat="dd/MM/yyyy"
+                                                    change=".onSearch"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>FechaRegistro}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <DateRangeSelection
+                                                    dateValue="{BackFiltersModel>/FechaRegistroDesde}"
+                                                    secondDateValue="{BackFiltersModel>/RangoRegistroHasta}"
+                                                    placeholder="{i18n>FechaRegistro}"
+                                                    displayFormat="MM/yyyy"
+                                                    change=".onSearch"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                    </f:formElements>
+                                </f:FormContainer>
+                            </f:formContainers>
+                        </f:Form>
+                    </content>
+                </Panel>
+
+                <!-- Panel Filtros Backend -->
+                <Panel
+                    expandable="false"
+                    expanded="true"
+                    class="customPanel">
+                    <content>
+                        <f:Form editable="true">
+                            <f:layout>
+                                <f:ResponsiveGridLayout/>
+                            </f:layout>
+                            <f:formContainers>
+                                <f:FormContainer>
+                                    <f:formElements/>
+                                </f:FormContainer>
+                                <f:FormContainer>
+                                    <f:formElements>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Tipo}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <ComboBox
+                                                    selectedKey="{BackFiltersModel>/Clasehab}"
+                                                    placeholder="Seleccionar">
+                                                    <core:Item key="H0002" text="TCT"/>
+                                                    <core:Item key="H0001" text="Mantenimiento"/>
+                                                    <core:Item key="H0003" text="PT15"/>
+                                                </ComboBox>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Idhabilitacion}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <Input
+                                                    valueLiveUpdate="true"
+                                                    placeholder="{i18n>Idhabilitacion}"
+                                                    value="{BackFiltersModel>/Idhabilitacion}"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>DNI}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <Input
+                                                    valueLiveUpdate="true"
+                                                    placeholder="{i18n>DNI}"
+                                                    value="{BackFiltersModel>/Documento}"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Apellido}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <Input
+                                                    valueLiveUpdate="true"
+                                                    placeholder="{i18n>Apellido}"
+                                                    value="{BackFiltersModel>/Apellido}"
+                                                    liveChange=".onSearch"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="{i18n>Legajo}">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <Input
+                                                    valueLiveUpdate="true"
+                                                    placeholder="{i18n>Legajo}"
+                                                    value="{BackFiltersModel>/Legajo}"/>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement>
+                                            <f:label>
+                                                <Label text="">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Label>
+                                            </f:label>
+                                            <f:fields>
+                                                <Button
+                                                    icon="sap-icon://search"
+                                                    text="{i18n>BT_BuscarSolic}"
+                                                    press=".onBackSearch">
+                                                    <layoutData><l:GridData span="L4 M4 S12"/></layoutData>
+                                                </Button>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                    </f:formElements>
+                                </f:FormContainer>
+                            </f:formContainers>
+                        </f:Form>
+                    </content>
+                </Panel>
+
+                <!-- Tabla de Habilitaciones -->
+                <Table
+                    id="tblHabilitaciones"
+                    busy="{Habilitaciones>/Busy}"
+                    busyIndicatorDelay="0"
+                    mode="MultiSelect"
+                    growing="true"
+                    growingThreshold="50"
+                    growingScrollToLoad="true"
+                    items="{path: 'Habilitaciones>/Habilitaciones'}">
+                    <columns>
+                        <Column><header><Label text="{i18n>Idhabilitacion}"/></header></Column>
+                        <Column><header><Label text="{i18n>Estado}"/></header></Column>
+                        <Column><header><Label text="{i18n>Empresa}"/></header></Column>
+                        <Column><header><Label text="{i18n>func}"/></header></Column>
+                        <Column><header><Label text="{i18n>NombreApellido}"/></header></Column>
+                        <Column><header><Label text="{i18n>textRegion}"/></header></Column>
+                        <Column><header><Label text="{i18n>DNI}"/></header></Column>
+                        <Column><header><Label text="{i18n>VtoDeHab}"/></header></Column>
+                        <Column><header><Label text="{i18n>FechaCreacion}"/></header></Column>
+                        <Column><header><Label text="{i18n>VtoApto}"/></header></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem
+                            type="Navigation"
+                            press=".onSelectHabilitacion">
+                            <cells>
+                                <Text text="{Habilitaciones>Idhabilitacion}"/>
+                                <Text text="{parts: [{path: 'Habilitaciones>Estado'}, {path: 'Habilitaciones>Lote'}], formatter: '.formatEstado'}"/>
+                                <Text text="{Habilitaciones>Empresa}"/>
+                                <HBox>
+                                    <Text
+                                        visible="{path: 'Habilitaciones>Clasehab', formatter: '.formatIsTCT'}"
+                                        text="{Habilitaciones>Lote}"/>
+                                    <Text
+                                        visible="{path: 'Habilitaciones>Clasehab', formatter: '.formatIsNotTCT'}"
+                                        text="{parts: [{path: 'Habilitaciones>Tipohab'}, {path: 'TipoHabsModel>/tipoHabs'}], formatter: '.formatFuncion'}"/>
+                                </HBox>
+                                <Text text="{Habilitaciones>Nombre} {Habilitaciones>Apellido}"/>
+                                <Text text="{parts: [{path: 'Habilitaciones>Area'}, {path: 'AllRegiones>/Regiones'}], formatter: '.formatRegion'}"/>
+                                <Text text="{Habilitaciones>Documento}"/>
+                                <Text
+                                    text="{path: 'Habilitaciones>VigenciaDate', formatter: '.formatFechas'}"
+                                    visible="{path: 'Habilitaciones>Estado', formatter: '.formatVisibilityVigencia'}"/>
+                                <Text
+                                    text="{path: 'Habilitaciones>FechaCreacion', formatter: '.formatFechas'}"
+                                    visible="{path: 'Habilitaciones>Estado', formatter: '.formatVisibilityVigencia'}"/>
+                                <Text text="{path: 'Habilitaciones>VtoApto', formatter: '.formatFechas'}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+            </VBox>
+        </content>
+    </Page>
+
+</mvc:View>

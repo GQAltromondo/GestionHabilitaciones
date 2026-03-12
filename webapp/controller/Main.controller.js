@@ -490,6 +490,14 @@ sap.ui.define([
             document.body.appendChild(link); // Required for FF
             link.click();
         },
+        formatIsTCT: function (Clasehab) {
+            return Clasehab === "H0002";
+        },
+
+        formatIsNotTCT: function (Clasehab) {
+            return Clasehab !== "H0002";
+        },
+
         formatVisibilityVigencia: function (estado) {
             if (estado === "N" || estado === "C") {
                 return false;
