@@ -7,7 +7,7 @@ sap.ui.jsview("transener.GestionHabilitaciones.view.App", {
         var app = new sap.m.App({
             id: this.createId("app"),
             pages: [
-                sap.ui.jsview(this.createId("Main"), "transener.GestionHabilitaciones.view.Main")
+                sap.ui.view({id: this.createId("Main"), viewName: "transener.GestionHabilitaciones.view.Main", type: "XML"})
             ]
         });
         return app;
