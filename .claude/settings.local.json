@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(node -e \":*)",
-      "Bash(node embed_xml.js)"
+      "Bash(node embed_xml.js)",
+      "Bash(node fix_preload.js)",
+      "Bash(node reembed_xml.js)",
+      "Bash(rm reembed_xml.js)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Guillote\\Desktop\\ALTROMONDO\\GestionHabilitaciones\\webapp"

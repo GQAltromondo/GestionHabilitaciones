@@ -4,7 +4,8 @@
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
     xmlns:l="sap.ui.layout"
-    xmlns:core="sap.ui.core">
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table">
 
     <Page
         title="{i18n>appTitle}"
@@ -352,57 +353,41 @@
                 </Panel>
 
                 <!-- Tabla de Habilitaciones -->
-                <Table
+                <t:Table
                     id="tblHabilitaciones"
                     busy="{Habilitaciones>/Busy}"
                     busyIndicatorDelay="0"
-                    mode="MultiSelect"
-                    growing="true"
-                    growingThreshold="50"
-                    growingScrollToLoad="true"
-                    items="{path: 'Habilitaciones>/Habilitaciones'}">
-                    <columns>
-                        <Column><header><Label text="{i18n>Idhabilitacion}"/></header></Column>
-                        <Column><header><Label text="{i18n>Estado}"/></header></Column>
-                        <Column><header><Label text="{i18n>Empresa}"/></header></Column>
-                        <Column><header><Label text="{i18n>func}"/></header></Column>
-                        <Column><header><Label text="{i18n>NombreApellido}"/></header></Column>
-                        <Column><header><Label text="{i18n>textRegion}"/></header></Column>
-                        <Column><header><Label text="{i18n>DNI}"/></header></Column>
-                        <Column><header><Label text="{i18n>VtoDeHab}"/></header></Column>
-                        <Column><header><Label text="{i18n>FechaCreacion}"/></header></Column>
-                        <Column><header><Label text="{i18n>VtoApto}"/></header></Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem
-                            type="Navigation"
-                            press=".onSelectHabilitacion">
-                            <cells>
-                                <Text text="{Habilitaciones>Idhabilitacion}"/>
-                                <Text text="{parts: [{path: 'Habilitaciones>Estado'}, {path: 'Habilitaciones>Lote'}], formatter: '.formatEstado'}"/>
-                                <Text text="{Habilitaciones>Empresa}"/>
+                    selectionMode="MultiToggle"
+                    visibleRowCountMode="Auto"
+                    threshold="50"
+                    rows="{path: 'Habilitaciones>/Habilitaciones'}"
+                    rowActionCount="1">
+                    <t:columns>
+                        <t:Column><t:label><Label text="{i18n>Idhabilitacion}"/></t:label><t:template><Text text="{Habilitaciones>Idhabilitacion}"/></t:template></t:Column>
+                        <t:Column><t:label><Label text="{i18n>Estado}"/></t:label><t:template><Text text="{parts: [{path: 'Habilitaciones>Estado'}, {path: 'Habilitaciones>Lote'}], formatter: '.formatEstado'}"/></t:template></t:Column>
+                        <t:Column><t:label><Label text="{i18n>Empresa}"/></t:label><t:template><Text text="{Habilitaciones>Empresa}"/></t:template></t:Column>
+                        <t:Column>
+                            <t:label><Label text="{i18n>func}"/></t:label>
+                            <t:template>
                                 <HBox>
-                                    <Text
-                                        visible="{path: 'Habilitaciones>Clasehab', formatter: '.formatIsTCT'}"
-                                        text="{Habilitaciones>Lote}"/>
-                                    <Text
-                                        visible="{path: 'Habilitaciones>Clasehab', formatter: '.formatIsNotTCT'}"
-                                        text="{parts: [{path: 'Habilitaciones>Tipohab'}, {path: 'TipoHabsModel>/tipoHabs'}], formatter: '.formatFuncion'}"/>
+                                    <Text visible="{path: 'Habilitaciones>Clasehab', formatter: '.formatIsTCT'}" text="{Habilitaciones>Lote}"/>
+                                    <Text visible="{path: 'Habilitaciones>Clasehab', formatter: '.formatIsNotTCT'}" text="{parts: [{path: 'Habilitaciones>Tipohab'}, {path: 'TipoHabsModel>/tipoHabs'}], formatter: '.formatFuncion'}"/>
                                 </HBox>
-                                <Text text="{Habilitaciones>Nombre} {Habilitaciones>Apellido}"/>
-                                <Text text="{parts: [{path: 'Habilitaciones>Area'}, {path: 'AllRegiones>/Regiones'}], formatter: '.formatRegion'}"/>
-                                <Text text="{Habilitaciones>Documento}"/>
-                                <Text
-                                    text="{path: 'Habilitaciones>VigenciaDate', formatter: '.formatFechas'}"
-                                    visible="{path: 'Habilitaciones>Estado', formatter: '.formatVisibilityVigencia'}"/>
-                                <Text
-                                    text="{path: 'Habilitaciones>FechaCreacion', formatter: '.formatFechas'}"
-                                    visible="{path: 'Habilitaciones>Estado', formatter: '.formatVisibilityVigencia'}"/>
-                                <Text text="{path: 'Habilitaciones>VtoApto', formatter: '.formatFechas'}"/>
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
+                            </t:template>
+                        </t:Column>
+                        <t:Column><t:label><Label text="{i18n>NombreApellido}"/></t:label><t:template><Text text="{Habilitaciones>Nombre} {Habilitaciones>Apellido}"/></t:template></t:Column>
+                        <t:Column><t:label><Label text="{i18n>textRegion}"/></t:label><t:template><Text text="{parts: [{path: 'Habilitaciones>Area'}, {path: 'AllRegiones>/Regiones'}], formatter: '.formatRegion'}"/></t:template></t:Column>
+                        <t:Column><t:label><Label text="{i18n>DNI}"/></t:label><t:template><Text text="{Habilitaciones>Documento}"/></t:template></t:Column>
+                        <t:Column><t:label><Label text="{i18n>VtoDeHab}"/></t:label><t:template><Text text="{path: 'Habilitaciones>VigenciaDate', formatter: '.formatFechas'}" visible="{path: 'Habilitaciones>Estado', formatter: '.formatVisibilityVigencia'}"/></t:template></t:Column>
+                        <t:Column><t:label><Label text="{i18n>FechaCreacion}"/></t:label><t:template><Text text="{path: 'Habilitaciones>FechaCreacion', formatter: '.formatFechas'}" visible="{path: 'Habilitaciones>Estado', formatter: '.formatVisibilityVigencia'}"/></t:template></t:Column>
+                        <t:Column><t:label><Label text="{i18n>VtoApto}"/></t:label><t:template><Text text="{path: 'Habilitaciones>VtoApto', formatter: '.formatFechas'}"/></t:template></t:Column>
+                    </t:columns>
+                    <t:rowActionTemplate>
+                        <t:RowAction>
+                            <t:RowActionItem type="Navigation" press=".onSelectHabilitacion"/>
+                        </t:RowAction>
+                    </t:rowActionTemplate>
+                </t:Table>
 
             </VBox>
         </content>

@@ -319,7 +319,7 @@ sap.ui.define([
         },
 
         onSelectHabilitacion: function (oEvent) {
-            var SelectedHabilitacion = oEvent.getSource().getBindingContext("Habilitaciones").getObject();
+            var SelectedHabilitacion = oEvent.getParameter("row").getBindingContext("Habilitaciones").getObject();
             var oModel = new sap.ui.model.json.JSONModel();
             oModel.setData(SelectedHabilitacion);
             
