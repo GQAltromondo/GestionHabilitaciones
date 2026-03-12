@@ -9,9 +9,10 @@ sap.ui.define([
     "transener/GestionHabilitaciones/utils/MessageBoxHelper",
     "transener/GestionHabilitaciones/utils/FormatHelper",
     "transener/GestionHabilitaciones/services/PuestosServices",
-    "transener/GestionHabilitaciones/services/EstacionesServices"
+    "transener/GestionHabilitaciones/services/EstacionesServices",
+    "transener/GestionHabilitaciones/services/HabilitacionServices"
 ], function (Controller, MessageBox, HabTecnicasService, HabRangoService, RegionServices,
-    TipoHabilitacionServices, NavigationHelper, MessageBoxHelper, FormatHelper, PuestosServices, EstacionesServices) {
+    TipoHabilitacionServices, NavigationHelper, MessageBoxHelper, FormatHelper, PuestosServices, EstacionesServices, HabilitacionServices) {
     "use strict";
     return Controller.extend("transener.GestionHabilitaciones.controller.Main", {
 
@@ -319,7 +320,7 @@ sap.ui.define([
         },
 
         onSelectHabilitacion: function (oEvent) {
-            var SelectedHabilitacion = oEvent.getParameter("row").getBindingContext("Habilitaciones").getObject();
+            var SelectedHabilitacion = oEvent.getSource().getBindingContext("Habilitaciones").getObject();
             var oModel = new sap.ui.model.json.JSONModel();
             oModel.setData(SelectedHabilitacion);
             
@@ -343,6 +344,64 @@ sap.ui.define([
                     });
                     break;
             }
+        },
+
+        onBeforeOpenContextMenu: function (oEvent) {
+            this._oContextItem = oEvent.getParameter("listItem");
+        },
+
+        onDuplicateHab: function () {
+            var oHab = this._oContextItem.getBindingContext("Habilitaciones").getObject();
+            var oDuplicarModel = new sap.ui.model.json.JSONModel({
+                Apellido: oHab.Apellido,
+                Area: oHab.Area,
+                Base: oHab.Base,
+                Clasehab: oHab.Clasehab,
+                Documento: oHab.Documento,
+                Empresa: oHab.Empresa,
+                Empresaext: oHab.Empresaext,
+                Interno: oHab.Interno,
+                Legajo: oHab.Legajo,
+                Lote: oHab.Lote,
+                Nombre: oHab.Nombre,
+                Puesto: oHab.Puesto,
+                Tipodoc: oHab.Tipodoc,
+                Tipohab: oHab.Tipohab,
+                Vigencia: oHab.Vigencia,
+                VtoApto: oHab.VtoApto,
+                Idhabilitacion: oHab.Idhabilitacion
+            });
+            this.getView().setModel(oDuplicarModel, "DuplicarModel");
+
+            if (!this._oDuplicarDialog) {
+                this._oDuplicarDialog = sap.ui.xmlfragment(
+                    this.getView().getId(),
+                    "transener.GestionHabilitaciones.view.DuplicarHabilitacion",
+                    this
+                );
+                this.getView().addDependent(this._oDuplicarDialog);
+            }
+            this._oDuplicarDialog.open();
+        },
+
+        onConfirmarDuplicar: function () {
+            // TODO: implementar guardado
+        },
+
+        onCancelarDuplicar: function () {
+            this._oDuplicarDialog.close();
+        },
+
+        _onDuplicarSuccess: function () {
+            this.getView().getModel("Habilitaciones").setProperty("/Busy", false);
+            MessageBox.success("Habilitación duplicada con éxito.");
+            this._oDuplicarDialog.close();
+            this.loadHabilitacionesModel();
+        },
+
+        _onDuplicarError: function () {
+            this.getView().getModel("Habilitaciones").setProperty("/Busy", false);
+            MessageBox.error("Error al duplicar la habilitación.");
         },
 
         formatDate: function (date) {

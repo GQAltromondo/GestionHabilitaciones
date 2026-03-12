@@ -20,6 +20,9 @@
             "name": "view/Main.view.xml"
         },
         {
+            "name": "view/DuplicarHabilitacion.fragment.xml"
+        },
+        {
             "name": "view/App.view.js"
         },
         {
