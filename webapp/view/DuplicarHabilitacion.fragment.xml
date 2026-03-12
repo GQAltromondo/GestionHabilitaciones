@@ -117,10 +117,10 @@
                                     <f:fields><Text text="{DuplicarModel>/Base}"/></f:fields>
                                 </f:FormElement>
                                 <f:FormElement label="{i18n>VtoDeHab}">
-                                    <f:fields><Text text="{DuplicarModel>/Vigencia}"/></f:fields>
+                                    <f:fields><Text text="{path: 'DuplicarModel>/Vigencia', formatter: '.formatFechas'}"/></f:fields>
                                 </f:FormElement>
                                 <f:FormElement label="{i18n>VtoApto}">
-                                    <f:fields><Text text="{DuplicarModel>/VtoApto}"/></f:fields>
+                                    <f:fields><Text text="{path: 'DuplicarModel>/VtoApto', formatter: '.formatFechas'}"/></f:fields>
                                 </f:FormElement>
                                 <f:FormElement label="{i18n>Estado}">
                                     <f:fields><Text text="{DuplicarModel>/Estado}"/></f:fields>
@@ -181,10 +181,10 @@
                                     <f:fields><Text text="{DuplicarModel>/Base}"/></f:fields>
                                 </f:FormElement>
                                 <f:FormElement label="{i18n>VtoDeHab}">
-                                    <f:fields><Text text="{DuplicarModel>/Vigencia}"/></f:fields>
+                                    <f:fields><Text text="{path: 'DuplicarModel>/Vigencia', formatter: '.formatFechas'}"/></f:fields>
                                 </f:FormElement>
                                 <f:FormElement label="{i18n>VtoApto}">
-                                    <f:fields><Text text="{DuplicarModel>/VtoApto}"/></f:fields>
+                                    <f:fields><Text text="{path: 'DuplicarModel>/VtoApto', formatter: '.formatFechas'}"/></f:fields>
                                 </f:FormElement>
                                 <f:FormElement label="{i18n>Estado}">
                                     <f:fields><Text text="Nueva Habilitacion"/></f:fields>
