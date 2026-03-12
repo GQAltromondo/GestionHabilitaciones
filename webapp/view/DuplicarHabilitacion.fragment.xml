@@ -6,66 +6,137 @@
 
     <Dialog
         id="dlgDuplicar"
-        title="Duplicar Habilitación"
-        contentWidth="600px"
+        title="Duplicar Habilitación N° {DuplicarModel>/Idhabilitacion}"
+        contentWidth="860px"
         draggable="true"
         resizable="true">
 
         <content>
-            <f:Form editable="false">
-                <f:layout>
-                    <f:ResponsiveGridLayout
-                        labelSpanL="4" labelSpanM="4" labelSpanS="12"
-                        emptySpanL="0" emptySpanM="0"
-                        columnsL="2" columnsM="2"/>
-                </f:layout>
-                <f:formContainers>
-                    <f:FormContainer title="Datos del Titular">
-                        <f:formElements>
-                            <f:FormElement label="{i18n>Empresa}">
-                                <f:fields><Text text="{DuplicarModel>/Empresa}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>Legajo}">
-                                <f:fields><Text text="{DuplicarModel>/Legajo}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>Nombre}">
-                                <f:fields><Text text="{DuplicarModel>/Nombre}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>Apellido}">
-                                <f:fields><Text text="{DuplicarModel>/Apellido}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>Documento}">
-                                <f:fields><Text text="{DuplicarModel>/Documento}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>Base}">
-                                <f:fields><Text text="{DuplicarModel>/Base}"/></f:fields>
-                            </f:FormElement>
-                        </f:formElements>
-                    </f:FormContainer>
-                    <f:FormContainer title="Datos de la Habilitación">
-                        <f:formElements>
-                            <f:FormElement label="{i18n>Tipo}">
-                                <f:fields><Text text="{DuplicarModel>/Clasehab}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>func}">
-                                <f:fields><Text text="{DuplicarModel>/Tipohab}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>textRegion}">
-                                <f:fields><Text text="{DuplicarModel>/Area}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>VtoDeHab}">
-                                <f:fields><Text text="{DuplicarModel>/Vigencia}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>VtoApto}">
-                                <f:fields><Text text="{DuplicarModel>/VtoApto}"/></f:fields>
-                            </f:FormElement>
-                            <f:FormElement label="{i18n>Idhabilitacion}">
-                                <f:fields><Text text="{DuplicarModel>/Idhabilitacion}"/></f:fields>
-                            </f:FormElement>
-                        </f:formElements>
-                    </f:FormContainer>
-                </f:formContainers>
-            </f:Form>
+            <VBox class="sapUiSmallMargin">
+
+                <!-- Datos de la habilitación origen (solo lectura) -->
+                <Title text="Habilitación origen" level="H5" titleStyle="H5" class="sapUiSmallMarginBottom"/>
+                <f:Form editable="false">
+                    <f:layout>
+                        <f:ResponsiveGridLayout
+                            labelSpanL="5" labelSpanM="5" labelSpanS="12"
+                            emptySpanL="0" emptySpanM="0"
+                            columnsL="3" columnsM="2" columnsS="1"
+                            singleContainerFullSize="false"/>
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="{i18n>Empresa}">
+                                    <f:fields><Text text="{DuplicarModel>/Empresa}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>Legajo}">
+                                    <f:fields><Text text="{DuplicarModel>/Legajo}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>Nombre}">
+                                    <f:fields><Text text="{DuplicarModel>/Nombre} {DuplicarModel>/Apellido}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>Documento}">
+                                    <f:fields><Text text="{DuplicarModel>/Documento}"/></f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="{i18n>Tipo}">
+                                    <f:fields><Text text="{DuplicarModel>/Clasehab}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>func}">
+                                    <f:fields><Text text="{DuplicarModel>/Tipohab}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>textRegion}">
+                                    <f:fields><Text text="{DuplicarModel>/Area}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>Base}">
+                                    <f:fields><Text text="{DuplicarModel>/Base}"/></f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="{i18n>VtoDeHab}">
+                                    <f:fields><Text text="{DuplicarModel>/Vigencia}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>VtoApto}">
+                                    <f:fields><Text text="{DuplicarModel>/VtoApto}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>FechaCreacion}">
+                                    <f:fields><Text text="{DuplicarModel>/FechaCreacion}"/></f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>Estado}">
+                                    <f:fields><Text text="{DuplicarModel>/Estado}"/></f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+
+                <core:HTML content="&lt;hr style='border:none;border-top:1px solid #e5e5e5;margin:8px 0'/&gt;"/>
+
+                <!-- Datos para la nueva habilitación duplicada -->
+                <Title text="Nueva habilitación" level="H5" titleStyle="H5" class="sapUiSmallMarginBottom"/>
+                <f:Form editable="true">
+                    <f:layout>
+                        <f:ResponsiveGridLayout
+                            labelSpanL="5" labelSpanM="5" labelSpanS="12"
+                            emptySpanL="0" emptySpanM="0"
+                            columnsL="3" columnsM="2" columnsS="1"
+                            singleContainerFullSize="false"/>
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="Dirección de duplicado">
+                                    <f:fields>
+                                        <Select selectedKey="{DuplicarModel>/Nomenclatura}" change=".onNomenclaturaChange">
+                                            <core:Item key="MR" text="MR — Transba → Transener"/>
+                                            <core:Item key="MB" text="MB — Transener → Transba"/>
+                                        </Select>
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="N° nueva habilitación">
+                                    <f:fields>
+                                        <Input
+                                            value="{DuplicarModel>/NuevoNumero}"
+                                            placeholder="ej: 000001"
+                                            maxLength="6"
+                                            description="{DuplicarModel>/Nomenclatura}"/>
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="{i18n>textRegion}">
+                                    <f:fields>
+                                        <ComboBox
+                                            selectedKey="{DuplicarModel>/NuevaArea}"
+                                            placeholder="Seleccionar región"
+                                            items="{path: 'AllRegiones>/Regiones'}">
+                                            <core:Item key="{AllRegiones>Codigo}" text="{AllRegiones>Region}"/>
+                                        </ComboBox>
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="ID resultante">
+                                    <f:fields>
+                                        <Text text="{DuplicarModel>/Nomenclatura}{DuplicarModel>/NuevoNumero}" class="sapUiStrongText"/>
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+
+            </VBox>
         </content>
 
         <beginButton>

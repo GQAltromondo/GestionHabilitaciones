@@ -369,7 +369,13 @@ sap.ui.define([
                 Tipohab: oHab.Tipohab,
                 Vigencia: oHab.Vigencia,
                 VtoApto: oHab.VtoApto,
-                Idhabilitacion: oHab.Idhabilitacion
+                FechaCreacion: oHab.FechaCreacion,
+                Estado: oHab.Estado,
+                Idhabilitacion: oHab.Idhabilitacion,
+                // Campos para la nueva habilitación
+                Nomenclatura: "MR",
+                NuevoNumero: "",
+                NuevaArea: ""
             });
             this.getView().setModel(oDuplicarModel, "DuplicarModel");
 
@@ -382,6 +388,10 @@ sap.ui.define([
                 this.getView().addDependent(this._oDuplicarDialog);
             }
             this._oDuplicarDialog.open();
+        },
+
+        onNomenclaturaChange: function () {
+            // El binding reactivo actualiza el "ID resultante" automáticamente
         },
 
         onConfirmarDuplicar: function () {
