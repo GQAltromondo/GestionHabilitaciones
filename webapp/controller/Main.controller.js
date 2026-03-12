@@ -51,6 +51,15 @@ sap.ui.define([
             this.LoadPuestos();
             this.loadFuncionOptions();
             this.createEstacionesModelForBothEmpresas();
+
+            // Refrescar la lista cada vez que se vuelve a esta vista desde un detalle
+            var oView = this.getView();
+            var oApp = this.getOwnerComponent().byId("App").byId("app");
+            oApp.attachAfterNavigate(function (oEvent) {
+                if (oEvent.getParameter("to").getId() === oView.getId()) {
+                    this.loadHabilitacionesModel();
+                }
+            }.bind(this));
         },
 
         loadFuncionOptions: function () {
